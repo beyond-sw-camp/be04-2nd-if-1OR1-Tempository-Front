@@ -19,6 +19,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
+  }
+  .introduction {
+    color: aliceblue;
+  }
   </style>
   

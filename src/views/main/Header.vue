@@ -4,7 +4,6 @@
       <RouterLink to="/signup" active-class="active">Sign Up</RouterLink>
       <br>
       <RouterLink to="/signin" active-class="active">Sign In</RouterLink>
-      
     </nav>
   </header>
 </template>
@@ -22,9 +21,13 @@ nav {
   font-size: 30px;
 }
 .active {
-  color: red;
+  color: yellow;
 }
 header {
   text-align: center;
+  background-color: black;
+}
+nav {
+  text-decoration-color: aliceblue;
 }
 </style>
