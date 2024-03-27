@@ -3,15 +3,10 @@ import Home from '@/views/home/Home.vue';
 import SignIn from '@/views/signin/SignIn.vue';
 import SignUp from '@/views/signup/SignUp.vue';
 import ProjectInfo from '@/views/projectView/ProjectInfo.vue';
-import ProjectList from '@/views/projectList/ProjectList.vue'
 import ProjectMemberInfo from '@/views/projectView/ProjectMemberInfo.vue';
 import ProjectWBS from '@/components/ProjectWBS.vue'
 import ProjectIssueBoard from '@/components/ProjectIssueBoard.vue'
 import ProjectIssueForm from '@/components/ProjectIssueForm.vue'
-import ProjectIssueView from '@/components/ProjectIssueView.vue'
-import ProjectDefinitionOfTable from '@/components/ProjectDefinitionOfTable.vue'
-
-
 
 const router = createRouter({
   history: createWebHistory(),
@@ -29,30 +24,22 @@ const router = createRouter({
         component: SignUp 
       },
       {
-        path: '/projectMemberInfo',
+        path: '/ProjectMemberInfo',
         component: ProjectMemberInfo
         
       },
       {
-          path: '/projectInfo',
+          path: '/ProjectInfo',
           component: ProjectInfo
 
       },
-      {
-        path: '/projectList',
-        component: ProjectList
-      },
-      
+
+
       {
           path: '/wbs',
           name: 'WBS',
           component: ProjectWBS
 
-      },
-      {
-          path: '/definitionoftable',
-          name: 'DefinitionOfTable',
-          component: ProjectDefinitionOfTable
       },
       {
           path: '/issue',
@@ -70,12 +57,18 @@ const router = createRouter({
           component: ProjectIssueForm,
           props: true
       },
+
       {
-          path: '/issue/:id/view',
-          name: 'IssueView',
-          component: ProjectIssueView,
-          props: true
-      }
+          path: '/testcase/:id',
+          name: 'Testcase',
+          component: () => import('@/components/ProjectTestcase.vue')
+      },
+
+      {
+        path: '/requirement/:id',
+        name: 'Requirement',
+        component: () => import('@/components/ProjectRequirement.vue')
+    }
     ]
 });
 
