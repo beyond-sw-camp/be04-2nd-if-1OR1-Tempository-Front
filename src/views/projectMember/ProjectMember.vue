@@ -68,8 +68,8 @@
    }
 
    .project {
-    width: 1400px;
-    height: 600px;
+    width: 1200px;
+    height: 400px;
     border: 1px solid black;
     margin : 5px;
    }
