@@ -1,7 +1,7 @@
 <template>
-    <!-- <RouterView/> -->
+    <RouterView/>
     <!-- <ProjectMember/> -->
-    <ProjectList/>
+    <!-- <ProjectList/> -->
     
     
 </template>
