@@ -4,9 +4,9 @@ import SignIn from '@/views/signin/SignIn.vue';
 import SignUp from '@/views/signup/SignUp.vue';
 import ProjectInfo from '@/views/projectView/ProjectInfo.vue';
 import ProjectMemberInfo from '@/views/projectView/ProjectMemberInfo.vue';
-import ProjectWBS from '@/components/views/ProjectWBS.vue'
-import ProjectIssueBoard from '@/components/views/ProjectIssueBoard.vue'
-import ProjectIssueForm from '@/components/views/ProjectIssueForm.vue'
+import ProjectWBS from '@/components/ProjectWBS.vue'
+import ProjectIssueBoard from '@/components/ProjectIssueBoard.vue'
+import ProjectIssueForm from '@/components/ProjectIssueForm.vue'
 
 
 const router = createRouter({
@@ -41,7 +41,7 @@ const router = createRouter({
           name: 'WBS',
           component: ProjectWBS
 
-      }
+      },
       {
           path: '/issue',
           name: 'IssueBoard',
