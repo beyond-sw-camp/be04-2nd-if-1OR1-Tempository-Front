@@ -7,6 +7,7 @@ import ProjectMemberInfo from '@/views/projectView/ProjectMemberInfo.vue';
 import ProjectWBS from '@/components/ProjectWBS.vue'
 import ProjectIssueBoard from '@/components/ProjectIssueBoard.vue'
 import ProjectIssueForm from '@/components/ProjectIssueForm.vue'
+import ProjectIssueView from '@/components/ProjectIssueView.vue'
 
 
 const router = createRouter({
@@ -56,6 +57,12 @@ const router = createRouter({
           path: '/issue/:id',
           name: 'IssueEdit',
           component: ProjectIssueForm,
+          props: true
+      },
+      {
+          path: '/issue/:id/view',
+          name: 'IssueView',
+          component: ProjectIssueView,
           props: true
       }
     ]
