@@ -3,11 +3,13 @@ import Home from '@/views/home/Home.vue';
 import SignIn from '@/views/signin/SignIn.vue';
 import SignUp from '@/views/signup/SignUp.vue';
 import ProjectInfo from '@/views/projectView/ProjectInfo.vue';
+import ProjectList from '@/views/projectList/ProjectList.vue'
 import ProjectMemberInfo from '@/views/projectView/ProjectMemberInfo.vue';
 import ProjectWBS from '@/components/ProjectWBS.vue'
 import ProjectIssueBoard from '@/components/ProjectIssueBoard.vue'
 import ProjectIssueForm from '@/components/ProjectIssueForm.vue'
 import ProjectIssueView from '@/components/ProjectIssueView.vue'
+
 
 
 const router = createRouter({
@@ -26,17 +28,20 @@ const router = createRouter({
         component: SignUp 
       },
       {
-        path: '/ProjectMemberInfo',
+        path: '/projectMemberInfo',
         component: ProjectMemberInfo
         
       },
       {
-          path: '/ProjectInfo',
+          path: '/projectInfo',
           component: ProjectInfo
 
       },
-
-
+      {
+        path: '/projectList',
+        component: ProjectList
+      },
+      
       {
           path: '/wbs',
           name: 'WBS',
