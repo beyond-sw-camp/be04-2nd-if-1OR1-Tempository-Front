@@ -1,116 +1,168 @@
 <template>
-    <div>
-        <ProjectTemplateHeader/>
-    </div>
-    
-    <!-- 테스트케이스 -->
-    <div id="test" class="test">
-        <table id="testcase" class="testcase">
+    <div class="container">
+        <Header :projectName="projectName"></Header>
+        <div class="table-responsive">
+            <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>No</th>
-                    <th>분류</th>
-                    <th>테스트 내용</th>
-                    <th>기대값</th>
-                    <th>결과</th>
-                    <th>비고</th>
+                <th v-for="field in fields" :key="field.key">{{ field.label }}</th>
                 </tr>
             </thead>
-            <!-- 목 api 사용 -->
-            <tbody>                
-                <tr v-for="testcase in testcases" :key="testcase.id">
-                    <td>{{ testcase.id }}</td>
-                    <td>separate</td>
-                    <td>{{ testcase.title }}</td>
-                    <td>expectedValue</td>
-                    <td>{{ testcase.completed }}</td>
-                    <td>note</td>
-                </tr>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+            <tbody>
+                <tr v-for="(row, index) in tableData" :key="row.no">
+                <td> {{ row.no }} </td>
+                <td>
+                    <input
+                    v-if="!isReadOnly"
+                    v-model="row.separate"
+                    type="text"
+                    class="form-control"
+                    placeholder="분류"
+                    />
+                    <span v-else>{{ row.separate }}</span>
+                </td>
+                <td>
+                    <input
+                    v-if="!isReadOnly"
+                    v-model="row.content"
+                    type="text"
+                    class="form-control"
+                    placeholder="테스트 내용"
+                    />
+                    <span v-else>{{ row.content }}</span>
+                </td>
+                <td>
+                    <input
+                    v-if="!isReadOnly"
+                    v-model="row.expectedValue"
+                    type="text"
+                    class="form-control"
+                    placeholder="기대값"
+                    />
+                    <span v-else>{{ row.expectedValue }}</span>
+                </td>
+                <td>
+                    <select v-if="!isReadOnly" v-model="row.result" class="form-select">
+                        <option value="진행전">진행 전</option>
+                        <option value="진행중">진행 중</option>
+                        <option value="실패">실패</option>
+                        <option value="성공">성공</option>
+                    </select>
+                    <span v-else>{{ row.result }}</span>
+                </td>
+                <td>
+                    <input
+                    v-if="!isReadOnly"
+                    v-model="row.note"
+                    type="text"
+                    class="form-control"
+                    placeholder="비고"
+                    />
+                    <span v-else>{{ row.note }}</span>
+                </td>
+                <td v-if="!isReadOnly">
+                    <button class="btn btn-dark" @click="deleteRow(index)">DELETE</button>
+                </td>
+                </tr>
             </tbody>
-
-            <!-- json 파일 사용 -->
-            <!-- <tbody>                
-                <tr v-for="testcase in testcases" :key="testcase.no">
-                    <td>{{ testcase.no }}</td>
-                    <td>{{ testcase.separate }}</td>
-                    <td>{{ testcase.content }}</td>
-                    <td>{{ testcase.expectedValue }}</td>
-                    <td>{{ testcase.result }}</td>
-                    <td>{{ testcase.note }}</td>
-                </tr>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-            </tbody> -->
-        </table>
-
+            </table>
+        </div>
+        <div class="d-flex justify-content-between mt-3">
+            <button class="btn btn-dark" @click="backToProject">Back to Project</button>
+            <div>
+            <button v-if="!isReadOnly" class="btn btn-dark me-2" @click="isReadOnly = true">Save</button>
+            <button v-if="!isReadOnly" class="btn btn-dark" @click="addRow()">Add Column</button>
+            <button v-else class="btn btn-dark" @click="isReadOnly = false">Modify</button>
+            </div>
+        </div>
     </div>
-
-    <!-- 버튼 -->
-    <div class="btn">
-        <button type="button" class="btn btn-dark">Save</button>
-        <button type="button" class="btn btn-dark">Add Column</button>
-        <button type="button" class="btn btn-dark">Back to Project List</button>
-    </div>
-    
 </template>
 
 <script setup>
-    import ProjectTemplateHeader from './ProjectTemplateHeader.vue';
-    // import testcasedummy from '@/testjson/testcasedummy.json';
+    import Header from './ProjectTemplateHeader.vue'
+    import { onMounted, ref } from 'vue'
+    import testcasedummy from '@/testjson/testcasedummy.json'
 
-    import { onMounted, ref } from "vue";
-
-    // 목 api 사용
-    const testcases = ref([]);
-
-    onMounted(async () =>{
-        const response = fetch("https://jsonplaceholder.typicode.com/users/1/todos")
-                        .then(response => response.json());
-        testcases.value = await response;
-    });
-
-    // json 파일 사용
-    // const testcases = testcasedummy;
-
+    const tableData = ref([]);
     
+    // 현재 json 파일로 불러옴 서버로 변경 필요
+    onMounted(() => {
+        tableData.value = testcasedummy.projectTestcases;
+    });
+    
+    const fields = ref([
+        { key: 'no', label: 'No'},
+        { key: 'separate', label: '분류' },
+        { key: 'content', label: '테스트 내용' },
+        { key: 'expectedValue', label: '기대값' },
+        { key: 'result', label: '결과' },
+        { key: 'note', label: '비고' },
+    ])
+    
+    // 페이지에 들어왔을 때 modify 버튼 활성화
+    const isReadOnly = ref(true)
+    
+    const addRow = () => {
+        const index = tableData.value.length;
+        tableData.value.push({ no: index+1, separate: '', content: '', expectedValue: '', result: '진행전', note: '' })
+    }
+    
+    const deleteRow = (index) => {
+        tableData.value.splice(index, 1);
+
+        // 삭제 후 인덱스 값 업데이트(서버랑 연결되면 변경될 수 있음)
+        for (let i = index; i < tableData.value.length; i++) {
+            tableData.value[i].no = i+1;
+        }
+    }
+    
+    const backToProject = () => {
+        // Back to Project 버튼 클릭 시 동작할 내용 작성
+        console.log('Back to Project clicked')
+    }
 </script>
 
 <style scoped>
-    .test {
-            display: flex;
-            justify-content : center;
-            padding: 20px 0;
-        }
 
-        .testcase {
-            width: 90%;
-            border: 1px solid black;
-        }
+    .table-responsive {
+        overflow-x: auto; /* 가로 스크롤을 필요로 하는 경우 */
+        overflow-y: auto; /* 세로 스크롤을 필요로 하는 경우 */
+        max-height: 1000px; /* 원하는 높이로 설정 */
+    }
+    .table {
+        width: 100%;
+    }
+    
+    .table th,
+    .table td {
+        padding: 0.5rem;
+        text-align: center;
+    }
+    
+    
+    .table th:nth-child(5),
+    .table td:nth-child(5)
+    {
+        min-width: 120px;
+        width: 20%;
+    }
+    
+    
+    .table th:nth-child(3),
+    .table td:nth-child(3),
+    .table th:nth-child(4),
+    .table td:nth-child(4),
+    .table th:nth-child(6),
+    .table td:nth-child(6)
+    {
+        min-width: 200px;
+        width: 40%;
+    }
 
-        .testcase tr {            
-            display: flex;
-            justify-content : center;
-        }
-
-        .testcase th {
-            width: 100%;
-            border: 1px solid black;
-            text-align: center;
-            align-items : center;
-        }
-
-
-        .testcase td {
-            width: 100%;
-            border: 1px solid black;
-            text-align: center;
-            align-items : center;
-        }
-
-        .no {
-            width: 5%;
-        }
-        
-        .btn {
-            display: flex;
-            justify-content : right;
-        }
+    .table th:nth-child(2),
+    .table td:nth-child(2)
+    {
+        min-width: 150px;
+        width: 30%;
+    }
 </style>
