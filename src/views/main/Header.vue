@@ -1,33 +1,53 @@
 <template>
-  <header>
-    <nav>
-      <RouterLink to="/signup" active-class="active">Sign Up</RouterLink>
+    <nav class="button">
       <br>
-      <RouterLink to="/signin" active-class="active">Sign In</RouterLink>
+      <button class="signup" @click="goToSignUp()">Sign Up</button>
+      <button class="signin" @click="goToSignIn()">Sign In</button>
+      <br>
     </nav>
-  </header>
 </template>
 
 <script setup>
-  import {RouterLink} from 'vue-router';  
+  import {useRouter} from "vue-router";
+  const router = useRouter();
+
+  function goToSignIn() {
+    router.push('/signin')
+  }
+
+  function goToSignUp() {
+    router.push('/signup')
+  }
+
 </script>
 
 <style scoped>
 nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-  font-size: 30px;
-}
-.active {
-  color: yellow;
-}
-header {
-  text-align: center;
   background-color: black;
+  text-align: right;
+  font-size: 15px;
+  padding-bottom: 25px;
+  padding-right: 30px;
 }
-nav {
-  text-decoration-color: aliceblue;
+button.signup {
+  background-color: gray;
+  color: azure;
+  border: 4px solid black;
+  padding: 15px 30px;
+  font-size: 15px;
+  text-decoration: none;
+  display: inline-block;
+  shape-margin: 5%;
+  
+}
+button.signin {
+  background-color: gray;
+  color: azure;
+  border: 4px solid black;
+  padding: 15px 30px;
+  font-size: 15px;
+  text-decoration: none;
+  display: inline-block;
+  shape-margin: 5%;
 }
 </style>
