@@ -1,10 +1,16 @@
 <template>
-    <nav class="button">
+
       <br>
+      <div class="container">
+        <div></div>
+        <div class="project"><h1>ProjectList</h1></div>
+        <div class="buttons">
         <button class="mypage" @click="goToMyPage()">My Page</button>
         <button class="logout" @click="logout()">Log Out</button>
+    </div>
+      </div>
       <br>
-    </nav>
+
 </template>
 
 <script setup>
@@ -22,17 +28,11 @@
 </script>
 
 <style scoped>
-nav {
-  background-color: black;
-  text-align: right;
-  font-size: 15px;
-  padding-bottom: 25px;
-  padding-right: 30px;
-}
+
 button.mypage {
   background-color: gray;
   color: azure;
-  border: 4px solid black;
+  border: 1px solid black;
   padding: 15px 30px;
   font-size: 15px;
   text-decoration: none;
@@ -43,12 +43,36 @@ button.mypage {
 button.logout {
   background-color: gray;
   color: azure;
-  border: 4px solid black;
+  border: 1px solid black;
   padding: 15px 30px;
   font-size: 15px;
   text-decoration: none;
   display: inline-block;
   shape-margin: 5%;
 }
+.container {
+        width: 100%;
+        height: 100px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        border: 1px solid black;
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+
+    .project {
+        width: 30%;
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: black;
+        color: white;
+        border: 1px solid black;
+        margin-left: 180px;
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
 
 </style>
