@@ -80,14 +80,23 @@
 
 <script setup>
     import Header from './ProjectTemplateHeader.vue'
+    import axios from 'axios'
     import { onMounted, ref } from 'vue'
-    import testcasedummy from '@/testjson/testcasedummy.json'
+    import {useRoute} from 'vue-router'
 
+    const currentRoute = useRoute();
     const tableData = ref([]);
-    
-    // 현재 json 파일로 불러옴 서버로 변경 필요
-    onMounted(() => {
-        tableData.value = testcasedummy.projectTestcases;
+
+    // axios를 이용하여 서버와 연결
+    onMounted(async () =>{
+        try {
+            const response = await axios.get(`http://localhost:9500/testcase/${currentRoute.params.id}`);
+            const data = response.data;
+            tableData.value = data.projectTestcases;
+
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
     });
     
     const fields = ref([
