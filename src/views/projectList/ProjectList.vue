@@ -4,13 +4,16 @@
     <div class="container">
       <div class="projects" v-for="project in projects" :key="project.id">
         <div class="project">
-          <h2>{{ project.name }}</h2>
-            <p>{{ project.content }}</p>
-        <button class="goProject" @click="goToProject(project.id)">Setting</button>
+            <RouterLink :to="{ path: `/project/${project.id}`, query: { projectName: project.name } }" active-class="active"><h2>{{ project.name }}</h2></RouterLink>
+            </div>
+            <div class="project">
+              <RouterLink :to="{ path: `/project/${project.id}`, query: { projectName: project.name } }" active-class="active"><p>{{ project.content }}</p></RouterLink>
+              <button class="goProject" @click="goToProject(project.id,project.name)">Setting</button>
+            </div>
+            <div class="underline"></div>
       </div>
 
     </div>
-  </div>
 </template>
 
 <script setup>
@@ -21,8 +24,8 @@
 
   const router = useRouter();
 
-  function goToProject(projectId) {
-    router.push(`/project/${projectId}`)
+  function goToProject(projectId,projectName) {
+    router.push({ path: `/manageProject/${projectId}`, query: { projectName }});
   }
 
 const projects = ref([]);
@@ -33,6 +36,7 @@ onMounted(async () => {
     const response = await axios.get(`http://localhost:9500/project/myproject`)
     // 요청이 성공했을 때 받은 데이터를 Vue 컴포넌트 데이터에 저장
     projects.value = response.data.projects;
+    
   } catch (error) {
     console.error('데이터를 받아오는 중 에러 발생:', error);
   }
@@ -79,10 +83,11 @@ onMounted(async () => {
       padding: 1rem;
       background-color: lightgray;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
     }
 
     .project {
-      border-bottom: 1px solid #ddd;
+      border-bottom: 1px solid black;
       padding: 1rem 0;
       display: flex;
       justify-content: space-between;
@@ -96,11 +101,16 @@ onMounted(async () => {
     .project h2 {
       font-size: 1.2rem;
       margin-bottom: 0.5rem;
+      color: black;
+      text-decoration: underline;
     }
 
     .project p {
       margin-bottom: 0.5rem;
-      color: #666;
+      color: black;
+      text-decoration: underline;
+
+      
     }
 
     .project button {
@@ -110,4 +120,10 @@ onMounted(async () => {
       padding: 0.5rem 1rem;
       cursor: pointer;
     }
+
+    .porject underline {
+      text-decoration: underline;
+    }
+
+
 </style>
