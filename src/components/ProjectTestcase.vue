@@ -115,7 +115,6 @@
     // 페이지에 들어왔을 때 modify 버튼 활성화
     const isReadOnly = ref(true)
     
-    const emptyCheck = ref(false);
     const addRow = () => {
         const lastItem = tableData.value[tableData.value.length - 1];
         
