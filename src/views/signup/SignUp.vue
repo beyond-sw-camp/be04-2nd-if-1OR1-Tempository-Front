@@ -7,16 +7,17 @@
 
     <div class="signup">
       Name <br>
-      <input type="text" name="" id=""><br><br>
+      <input type="text" v-model="newUser.name"><br><br>
 
       NickName <br>
-      <input type="text" name="" id=""><br><br>
+      <input type="text" v-model="newUser.nickname"><br><br>
 
       E-mail <br>
-      <input type="email" name="" id=""><br><br>
+      <input type="email" v-model="newUser.email"><br><br>
 
       Password <br>
-      <input type="password" name="" id=""><br><br><br>
+      <input type="password" v-model="newUser.password"><br><br><br>
+
       <button class="signup" @click="successSignUp()">Sign Up</button>
       <button class="home" @click="goToHome()">Home</button>
     </div>
@@ -29,10 +30,32 @@
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router';
-const router = useRouter();
+  import axios from 'axios'
+  import { onMounted, ref } from 'vue'
+  import { useRoute, useRouter  } from 'vue-router'
 
-function successSignUp() {
+  const currentRoute = useRoute();
+  const router = useRouter();
+  const newUser = {
+    name: '',
+    nickname: '',
+    email: '',
+    password: ''
+  };
+
+async function successSignUp() {
+  const sendData = {
+    name: newUser.name,
+    nickname: newUser.nickname,
+    email: newUser.email,
+    password: newUser.password
+  }
+
+  await axios.post(
+    `http://localhost:9500/user/signup`,
+    sendData
+  )
+
   router.push('/');
 }
 
