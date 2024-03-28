@@ -84,9 +84,12 @@
     import { onMounted, ref } from 'vue'
     import { useRoute, useRouter  } from 'vue-router'
 
+
     const currentRoute = useRoute();
     const router = useRouter();
     const tableData = ref([]);
+
+    const projectName = currentRoute.query.projectName;
 
     // axios를 이용하여 서버와 연결
     onMounted(async () =>{
@@ -99,8 +102,7 @@
             console.error('Error fetching data:', error);
         }
     });
-    
-    
+
     const fields = ref([
         { key: 'no', label: 'No'},
         { key: 'separate', label: '분류' },
@@ -158,6 +160,8 @@
 
         router.push(`/project/${currentRoute.params.id}`);
     }
+
+    
 </script>
 
 <style scoped>

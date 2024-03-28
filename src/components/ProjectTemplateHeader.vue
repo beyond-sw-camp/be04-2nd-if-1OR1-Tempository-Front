@@ -1,11 +1,15 @@
 <template>
     <div class="container">
-        <div class="project">project_name</div>
+        <div class="project">{{ projectName }}</div>
     </div>
 </template>
 
 <script setup>
-    // 해당 프로젝트 네임 넘어올 수 있게 구현
+    import {useRoute} from 'vue-router'
+
+    const currentRoute = useRoute();
+    const projectName = currentRoute.query.projectName;
+    console.log(projectName);
 </script>
     
 <style scoped>

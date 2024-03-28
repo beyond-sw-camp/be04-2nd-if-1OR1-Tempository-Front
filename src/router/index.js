@@ -70,7 +70,7 @@ const router = createRouter({
 
       },
       {
-          path: '/wbs',
+          path: '/wbs/:id',
           name: 'WBS',
           component: ProjectWBS
 
