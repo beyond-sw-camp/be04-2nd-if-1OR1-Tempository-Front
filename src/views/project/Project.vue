@@ -1,21 +1,21 @@
 <template>
-    <Header></Header>
-    <div class="project-container">
+  <Header v-if="!loading"><h4>{{ projectName }}</h4></Header>
+  <div class="project-container" v-if="!loading">
         <main>
           <div class="project-button">
-              <h4><RouterLink :to="{ path: `/requirement/${projectId}`, query: { projectName } }" active-class="active">Requirement</RouterLink></h4>
+              <h4><RouterLink :to="{ path: `/requirement/${projectId}`, query: { projectName: projectName.value } }" active-class="active">Requirement</RouterLink></h4>
               </div>
               <div class="project-button">
-              <h4><RouterLink :to="{ path: `/wbs/${projectId}`, query: { projectName } }" active-class="active">WBS</RouterLink></h4>
+              <h4><RouterLink :to="{ path: `/wbs/${projectId}`, query: { projectName: projectName.value } }" active-class="active">WBS</RouterLink></h4>
             </div>
             <div class="project-button">
-              <h4><RouterLink :to="{ path: `/definitionoftable/${projectId}`, query: { projectName } }" active-class="active">Definition Of Table</RouterLink></h4>
+              <h4><RouterLink :to="{ path: `/definitionoftable/${projectId}`, query: { projectName: projectName.value} }" active-class="active">Definition Of Table</RouterLink></h4>
             </div>
             <div class="project-button">
-              <h4><RouterLink :to="{ path: `/testcase/${projectId}`, query: { projectName } }" active-class="active">Test Case</RouterLink></h4>
+              <h4><RouterLink :to="{ path: `/testcase/${projectId}`, query: { projectName: projectName.value } }" active-class="active">Test Case</RouterLink></h4>
             </div>
             <div class="project-button">
-              <h4><RouterLink :to="{ path: `/issue/${projectId}`, query: { projectName } }" active-class="active">Issue</RouterLink></h4>
+              <h4><RouterLink :to="{ path: `/issue/${projectId}`, query: { projectName: projectName.value } }" active-class="active">Issue</RouterLink></h4>
             </div>
         </main>
         <main2>
@@ -37,21 +37,42 @@
       import Header from './Header.vue';
       import { useRouter } from 'vue-router';
       import {useRoute} from 'vue-router'
+      import axios from 'axios';
+      import { ref, onMounted } from 'vue';
       
 
        const router = useRouter();
-
        const currentRoute = useRoute();
+
        const projectId = currentRoute.params.id;
-       const projectName = currentRoute.query.projectName;
 
         function manageProject() {
-        router.push({ path: `/manageProject/${projectId}`, query: { projectName }});
+        router.push({ path: `/manageProject/${projectId}`, query: { projectName: projectName.value }});
        }
 
        function backToProjectList() {
         router.push('/projectList');
        }
+
+
+       const projects = ref([]);
+       const projectName = ref('');
+       const projectMember = ref([]);
+       
+
+        onMounted(async () => {
+        
+          try {
+            const response = await axios.get(`http://localhost:9500/project/${projectId}`)
+            // 요청이 성공했을 때 받은 데이터를 Vue 컴포넌트 데이터에 저장
+            projects.value = response.data
+            projectName.value = response.data.name
+            projectMember.value = response.data.members;
+            console.log(projectMember.value);
+          } catch (error) {
+            console.error('데이터를 받아오는 중 에러 발생:', error);
+          }
+        });
       
     
     

@@ -1,14 +1,10 @@
 <template>
     <div class="container">
-        <div class="project"><h2>{{ projectName }}</h2></div>
+        <div class="project"><slot></slot></div>
     </div>
 </template>
 
 <script setup>
-    import {useRoute} from 'vue-router'
-
-const currentRoute = useRoute();
-const projectName = currentRoute.query.projectName;
 
 </script>
     

@@ -1,5 +1,5 @@
 <template>
-<Header></Header>
+<Header><h4>{{ projectName }}</h4></Header>
 <div class="project-container">
     <main>
         <div class="project-button">
@@ -24,7 +24,7 @@
    
    <script setup>
   import {RouterLink, RouterView} from 'vue-router';
-  import Header from './Header.vue';
+  import Header from '../project/Header.vue';
   import { useRouter } from 'vue-router';
   import {useRoute} from 'vue-router'
 
