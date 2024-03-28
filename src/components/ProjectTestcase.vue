@@ -68,7 +68,7 @@
             </table>
         </div>
         <div class="d-flex justify-content-between mt-3">
-            <button class="btn btn-dark" @click="backToProject">Back to Project</button>
+            <button class="btn btn-dark" @click="backToProject()">Back to Project</button>
             <div>
             <button v-if="!isReadOnly" class="btn btn-dark me-2" @click="saveData()">Save</button>
             <button v-if="!isReadOnly" class="btn btn-dark" @click="addRow()">Add Column</button>
@@ -133,11 +133,18 @@
         }
     }
 
-    const saveData = function() {
+    async function saveData() {
+        const sendData = { target: tableData.value };
+
+        await axios.post(
+            `http://localhost:9500/testcase/save/${currentRoute.params.id}`, 
+            sendData
+        ); 
+        console.log('Data saved to DB successfully');
+
         console.log(tableData.value);
         
         this.isReadOnly = true;
-        
     }
     
     const deleteRow = (index) => {
@@ -149,9 +156,10 @@
         }
     }
     
-    const backToProject = () => {
-        // Back to Project 버튼 클릭 시 동작할 내용 작성
-        console.log('Back to Project clicked')
+    function backToProject() {
+
+        // projectInfo 페이지로 이동(프로젝트id 추가 필요)
+        currentRoute.push('/projectInfo');
     }
 </script>
 
