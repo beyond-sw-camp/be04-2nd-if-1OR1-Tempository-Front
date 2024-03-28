@@ -39,6 +39,33 @@
   };
   const statusNickname = ref(0);
 
+  // 에러 처리 함수
+function handleErrorMessage(error) {
+  if (error.response && error.response.status === 400) {
+    const errorMessage = error.response.data.message;
+    // 에러 메시지를 알림창으로 표시
+    alert(errorMessage);
+    // 로그인 페이지로 리다이렉트
+    router.push('/signin'); // 로그인 페이지 경로로 변경해주세요
+  }
+}
+
+async function fetchData() {
+  try {
+    const res = await axios.get('http://localhost:9500/user/who-am-i');
+    user.value.name = res.data.name;
+    user.value.nickname = res.data.nickname;
+    user.value.email = res.data.email;
+  } catch (error) {
+    handleErrorMessage(error);
+  }
+}
+
+onMounted(() => {
+  // 페이지가 마운트되면 데이터를 가져옵니다.
+  fetchData();
+});
+
   async function updateInfo(){
     const sendData = {
       name: user.name,
