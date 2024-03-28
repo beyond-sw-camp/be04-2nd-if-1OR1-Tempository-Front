@@ -9,10 +9,11 @@ import ManageProject from '@/views/projectMember/ProjectMember.vue';
 import ProjectWBS from '@/components/ProjectWBS.vue'
 import ProjectIssueBoard from '@/components/ProjectIssueBoard.vue'
 import ProjectIssueForm from '@/components/ProjectIssueForm.vue'
-import ProjectDefinitionOfTable from '@/components/ProjectDefinitionOfTable.vue'
+import ProjectTableListView from '@/components/ProjectTableListView.vue'
+import ProjectTableDetailView from '@/components/ProjectTableDetailView.vue'
+import ProjectTableAddView from '@/components/ProjectTableAddView.vue'
 import ProjectList from '@/views/projectList/ProjectList.vue'
 import Project from '@/views/project/Project.vue'
-import EditMyInfo from '@/views/mypage/EditMyInfo.vue';
 
 const router = createRouter({
   history: createWebHistory(),
@@ -64,13 +65,22 @@ const router = createRouter({
       },
 
       {
-        path: '/definitionoftable',
-        name: 'DefinitionOfTable',
-        component: ProjectDefinitionOfTable
-
+        path: '/table/:projectId',
+        name: 'TableListView',
+        component: ProjectTableListView
       },
       {
-          path: '/wbs/:id',
+        path: '/table/:projectId/:tableNo',
+        name: 'TableDetailView',
+        component: ProjectTableDetailView
+      },
+      {
+        path: '/table/:projectId/new',
+        name: 'TableAddView',
+        component: ProjectTableAddView
+      },
+      {
+          path: '/wbs',
           name: 'WBS',
           component: ProjectWBS
 
@@ -102,11 +112,7 @@ const router = createRouter({
         path: '/requirement/:id',
         name: 'Requirement',
         component: () => import('@/components/ProjectRequirement.vue')
-      },
-      {
-        path: '/edit-my-info',
-        component: EditMyInfo
-      }
+    }
     ]
 });
 
