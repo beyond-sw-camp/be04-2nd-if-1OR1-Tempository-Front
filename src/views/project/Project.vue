@@ -9,7 +9,7 @@
               <h4><RouterLink :to="{ path: `/wbs/${projectId}`, query: { projectName } }" active-class="active">WBS</RouterLink></h4>
             </div>
             <div class="project-button">
-              <h4><RouterLink :to="{ path: `/definitionoftable/${projectId}`, query: { projectName} }" active-class="active">Definition Of Table</RouterLink></h4>
+              <h4><RouterLink :to="{ path: `/table/${projectId}`, query: { projectName} }" active-class="active">Definition Of Table</RouterLink></h4>
             </div>
             <div class="project-button">
               <h4><RouterLink :to="{ path: `/testcase/${projectId}`, query: { projectName } }" active-class="active">Test Case</RouterLink></h4>
