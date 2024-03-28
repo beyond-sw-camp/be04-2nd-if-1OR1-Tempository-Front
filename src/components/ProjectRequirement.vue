@@ -61,7 +61,7 @@
         <div class="d-flex justify-content-between mt-3">
             <button class="btn btn-dark" @click="backToProject">Back to Project</button>
             <div>
-            <button v-if="!isReadOnly" class="btn btn-dark me-2" @click="isReadOnly = true">Save</button>
+            <button v-if="!isReadOnly" class="btn btn-dark me-2" @click="saveData()">Save</button>
             <button v-if="!isReadOnly" class="btn btn-dark" @click="addRow()">Add Column</button>
             <button v-else class="btn btn-dark" @click="isReadOnly = false">Modify</button>
             </div>
@@ -122,6 +122,17 @@
             tableData.value.push({ no: index+1, separate: '', name: '', content: '', note: '' })
         }
     }
+
+    async function saveData() {
+        const sendData = { target: tableData.value };
+
+        await axios.post(
+            `http://localhost:9500/requirement/save/${currentRoute.params.id}`, 
+            sendData
+        );
+        
+        this.isReadOnly = true;
+    }
     
     const deleteRow = (index) => {
         tableData.value.splice(index, 1);
@@ -133,7 +144,7 @@
     }
     
     const backToProject = () => {
-        
+
         // projectInfo 페이지로 이동(프로젝트id 추가 필요)
         router.push('/projectInfo');
     }
