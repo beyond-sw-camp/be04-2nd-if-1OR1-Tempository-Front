@@ -70,7 +70,7 @@
         <div class="d-flex justify-content-between mt-3">
             <button class="btn btn-dark" @click="backToProject">Back to Project</button>
             <div>
-            <button v-if="!isReadOnly" class="btn btn-dark me-2" @click="isReadOnly = true">Save</button>
+            <button v-if="!isReadOnly" class="btn btn-dark me-2" @click="saveData()">Save</button>
             <button v-if="!isReadOnly" class="btn btn-dark" @click="addRow()">Add Column</button>
             <button v-else class="btn btn-dark" @click="isReadOnly = false">Modify</button>
             </div>
@@ -99,6 +99,7 @@
         }
     });
     
+    
     const fields = ref([
         { key: 'no', label: 'No'},
         { key: 'separate', label: '분류' },
@@ -111,9 +112,32 @@
     // 페이지에 들어왔을 때 modify 버튼 활성화
     const isReadOnly = ref(true)
     
+    const emptyCheck = ref(false);
     const addRow = () => {
-        const index = tableData.value.length;
-        tableData.value.push({ no: index+1, separate: '', content: '', expectedValue: '', result: '진행전', note: '' })
+        const lastItem = tableData.value[tableData.value.length - 1];
+        
+        // 빈 행이 이미 있는 경우 행 추가x
+        const attributesToCheck = ['separate', 'content', 'expectedValue', 'note'];
+        let emptyCheck = false;
+
+        for (const attribute of attributesToCheck) {
+            if (lastItem[attribute] !== '') {
+                emptyCheck = true;
+                break;
+            }
+        }
+        
+        if (emptyCheck) {
+            const index = tableData.value.length;
+            tableData.value.push({ no: index+1, separate: '', content: '', expectedValue: '', result: '진행전', note: '' })
+        }
+    }
+
+    const saveData = function() {
+        console.log(tableData.value);
+        
+        this.isReadOnly = true;
+        
     }
     
     const deleteRow = (index) => {
