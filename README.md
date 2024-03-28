@@ -1,7 +1,7 @@
 # Tempository-Front
 <div align=center>
 
-<img src="https://github.com/beyond-sw-camp/be04-2nd-if-1OR1-Tempository-Front/blob/main/src/assets/images/header.jpg">
+<img src="https://github.com/beyond-sw-camp/be04-2nd-if-1OR1-Tempository-Front/blob/main/img/header.jpg">
 
 ---
 
