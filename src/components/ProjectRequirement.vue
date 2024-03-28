@@ -104,8 +104,23 @@
     const isReadOnly = ref(true)
     
     const addRow = () => {
-        const index = tableData.value.length;
-        tableData.value.push({ no: index+1, separate: '', name: '', content: '', note: '' })
+        const lastItem = tableData.value[tableData.value.length - 1];
+        
+        // 빈 행이 이미 있는 경우 행 추가x
+        const attributesToCheck = ['separate', 'name', 'content','note'];
+        let emptyCheck = false;
+
+        for (const attribute of attributesToCheck) {
+            if (lastItem[attribute] !== '') {
+                emptyCheck = true;
+                break;
+            }
+        }
+        
+        if (emptyCheck) {
+            const index = tableData.value.length;
+            tableData.value.push({ no: index+1, separate: '', name: '', content: '', note: '' })
+        }
     }
     
     const deleteRow = (index) => {
