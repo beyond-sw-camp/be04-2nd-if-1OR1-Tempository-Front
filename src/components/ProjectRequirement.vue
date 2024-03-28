@@ -79,6 +79,8 @@
     const router = useRouter();
 
     const tableData = ref([]);
+
+    const projectName = currentRoute.query.projectName;
     
     // axios를 이용하여 서버와 연결
     onMounted(async () =>{
