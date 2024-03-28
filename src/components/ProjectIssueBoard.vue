@@ -84,15 +84,21 @@
 </template>
 
 <script setup>
-import Header from './ProjectTemplateHeader.vue'
-import { computed } from "vue";
+import Header from "./ProjectTemplateHeader.vue";
+import { computed, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 import ProjectIssueForm from "./ProjectIssueForm.vue";
 
+
 const router = useRouter();
 const store = useStore();
-const issues = computed(() => store.state.issues);
+
+onMounted(() => {
+  store.dispatch("issue/fetchIssues");
+});
+
+const issues = computed(() => store.state.issues.issues);
 const todoIssues = computed(() =>
   issues.value.filter((issue) => issue.status === "todo")
 );
@@ -104,7 +110,7 @@ const doneIssues = computed(() =>
 );
 
 const navigateToIssueView = (issue) => {
-  router.push({ name: 'IssueView', params: { id: issue.id } });
+  router.push({ name: "IssueView", params: { id: issue.id } });
 };
 
 const navigateToIssueForm = (issue = null) => {
@@ -116,11 +122,11 @@ const navigateToIssueForm = (issue = null) => {
 };
 
 const deleteIssue = (issueToDelete) => {
-  store.dispatch("deleteIssue", issueToDelete);
+  store.dispatch("issues/deleteIssue", issueToDelete);
 };
 
 const backToProject = () => {
-  // 여기에 Back to Project 버튼 클릭 시 동작할 내용 추가
+  // Back to Project 버튼 클릭 시 동작할 내용 작성
   console.log("Back to Project clicked");
 };
 </script>
