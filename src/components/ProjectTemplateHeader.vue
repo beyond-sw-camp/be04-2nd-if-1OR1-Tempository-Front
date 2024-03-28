@@ -9,7 +9,6 @@
 
     const currentRoute = useRoute();
     const projectName = currentRoute.query.projectName;
-    console.log(projectName);
 </script>
     
 <style scoped>
