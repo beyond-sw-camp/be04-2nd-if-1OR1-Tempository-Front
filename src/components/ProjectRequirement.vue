@@ -145,8 +145,7 @@
     
     const backToProject = () => {
 
-        // projectInfo 페이지로 이동(프로젝트id 추가 필요)
-        router.push('/projectInfo');
+        router.push(`/project/${currentRoute.params.id}`);
     }
 </script>
 
