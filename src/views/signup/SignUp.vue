@@ -10,10 +10,21 @@
       <input type="text" v-model="newUser.name"><br><br>
 
       NickName <br>
-      <input type="text" v-model="newUser.nickname"><br><br>
+      <input type="text" v-model="newUser.nickname">
+      &nbsp
+      <span v-if="statusNickname === 200" class="v-symbol">V</span>
+      <span v-else-if="statusNickname === 400" class="x-symbol">X</span>
+      &nbsp<button class="checkExist" @click=checkNickname()>Check</button>
+      <br><br>
+      
 
       E-mail <br>
-      <input type="email" v-model="newUser.email"><br><br>
+      <input type="email" v-model="newUser.email">
+      &nbsp
+      <span v-if="statusEmail === 200" class="v-symbol">V</span>
+      <span v-else-if="statusEmail === 400" class="x-symbol">X</span>
+      &nbsp<button class="checkExist" @click=checkEmail()>Check</button>
+      <br><br>
 
       Password <br>
       <input type="password" v-model="newUser.password"><br><br><br>
@@ -42,6 +53,8 @@
     email: '',
     password: ''
   };
+  const statusNickname = ref(0);
+  const statusEmail = ref(0);
 
 async function successSignUp() {
   const sendData = {
@@ -57,6 +70,44 @@ async function successSignUp() {
   )
 
   router.push('/');
+}
+
+async function checkNickname() {
+  const sendData = {
+    nickname: newUser.nickname
+  }
+
+  try {
+    const response = await axios.post(
+      `http://localhost:9500/user/exist`,
+      sendData
+    )
+
+    statusNickname.value = response.status;
+  }catch (error) {
+    if (error.response) {
+      statusNickname.value = error.response.status;
+    }
+  }
+}
+
+async function checkEmail() {
+  const sendData = {
+    email: newUser.email
+  }
+
+  try {
+    const response = await axios.post(
+      `http://localhost:9500/user/exist`,
+      sendData
+    )
+
+    statusEmail.value = response.status;
+  }catch (error) {
+    if (error.response) {
+      statusEmail.value = error.response.status;
+    }
+  }
 }
 
 function goToHome() {
@@ -103,5 +154,24 @@ button.signup {
   background-color: black;
   color: white;
   border: none;
+}
+.checkExist{
+  text-align: center;
+  font-size: 20px;
+  width: 120px;
+  height: 4%;
+  background-color: black;
+  color: white;
+  border: none;
+}
+
+.v-symbol {
+  color: #00FF00; /* 밝은 연두색 */
+  font-weight: bold;
+}
+
+.x-symbol {
+  color: #FF0000; /* 빨간 색 */
+  font-weight: bold;
 }
 </style>
