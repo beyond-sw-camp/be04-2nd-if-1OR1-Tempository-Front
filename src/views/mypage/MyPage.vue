@@ -15,7 +15,7 @@
       E-mail <br>
       <input type="email" v-model="user.email" readonly><br><br>
 
-      <button class="edit" @click="goToEditMyPage">Edit</button>
+      <button class="edit" @click=goToEditMyPage()>Edit</button>
       <button class="home" @click="goBack()">Back</button>
     </div>
 
@@ -45,6 +45,10 @@ onMounted(async () => {
   user.value.nickname = res.data.nickname;
   user.value.email = res.data.email;
 });
+
+function goToEditMyPage() {
+  router.push("/edit-my-info");
+}
 
 function goBack() {
   router.push('/projectlist');

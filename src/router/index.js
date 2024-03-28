@@ -12,6 +12,7 @@ import ProjectIssueForm from '@/components/ProjectIssueForm.vue'
 import ProjectDefinitionOfTable from '@/components/ProjectDefinitionOfTable.vue'
 import ProjectList from '@/views/projectList/ProjectList.vue'
 import Project from '@/views/project/Project.vue'
+import EditMyInfo from '@/views/mypage/EditMyInfo.vue';
 
 const router = createRouter({
   history: createWebHistory(),
@@ -101,7 +102,11 @@ const router = createRouter({
         path: '/requirement/:id',
         name: 'Requirement',
         component: () => import('@/components/ProjectRequirement.vue')
-    }
+      },
+      {
+        path: '/edit-my-info',
+        component: EditMyInfo
+      }
     ]
 });
 
