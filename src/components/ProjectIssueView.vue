@@ -39,7 +39,7 @@
 </template>
 
 <script setup>
-import Header from './ProjectTemplateHeader.vue';
+import Header from "./Header.vue";
 import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import axios from "axios";

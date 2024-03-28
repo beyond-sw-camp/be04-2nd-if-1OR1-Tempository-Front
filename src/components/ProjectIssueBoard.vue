@@ -62,7 +62,7 @@
 import { ref, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import axios from 'axios';
-import Header from "./ProjectTemplateHeader.vue";
+import Header from "./Header.vue";
 
 const currentRoute = useRoute();
 const router = useRouter();

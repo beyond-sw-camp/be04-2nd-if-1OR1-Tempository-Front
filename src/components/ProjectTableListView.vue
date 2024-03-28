@@ -24,26 +24,32 @@
    </template>
    
    <script setup>
-   import Header from './ProjectTemplateHeader.vue';
-   import axios from 'axios';
-   import { onMounted, ref } from 'vue';
-   import { useRoute, useRouter } from 'vue-router';
-   
-   const currentRoute = useRoute();
-   const router = useRouter();
-   const tableData = ref([]);
-   
-   // axios를 이용하여 서버와 연결
-   onMounted(async () => {
-    try {
-      const response = await axios.get(`http://localhost:9500/table/${currentRoute.params.projectId}`);
-      const data = await response.data;
-      tableData.value = data.tableInfoList;
-      console.log(tableData.value);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-   });
+   import Header from './Header.vue';
+import axios from 'axios';
+import { onMounted, ref } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+
+const currentRoute = useRoute();
+const router = useRouter();
+const tableData = ref([]);
+const projectName = ref('');
+
+// axios를 이용하여 서버와 연결
+onMounted(async () => {
+  try {
+    const response = await axios.get(`http://localhost:9500/table/${currentRoute.params.projectId}`);
+    const data = await response.data;
+    tableData.value = data.tableInfoList;
+    console.log(tableData.value);
+
+    // 프로젝트 정보 가져오기
+    const projectResponse = await axios.get(`http://localhost:9500/project/${currentRoute.params.projectId}`);
+    const projectData = await projectResponse.data;
+    projectName.value = projectData.name;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+});
    
    const fields = ref([
     { key: 'id', label: 'Table No' },

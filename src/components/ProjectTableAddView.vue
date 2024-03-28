@@ -1,5 +1,6 @@
 <template>
     <div class="container">
+      <Header :projectName="projectName"></Header>
       <div class="table-header">
         <input
           v-model="tableName"
@@ -167,12 +168,16 @@
   </template>
   
   <script setup>
-  import { ref } from 'vue';
-  import { useRoute, useRouter } from 'vue-router';
-  
-  const currentRoute = useRoute();
-  const router = useRouter();
-  const tableName = ref('');
+  import { ref, onMounted } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+import axios from 'axios';
+import Header from './Header.vue';
+
+const currentRoute = useRoute();
+const router = useRouter();
+const tableName = ref('');
+const projectName = ref('');
+
   const columns = ref([
     {
       propertyNo: 1,
@@ -247,6 +252,15 @@
   const backToTableList = () => {
     router.push(`/table/${currentRoute.params.projectId}`);
   };
+
+  onMounted(async () => {
+  try {
+    const response = await axios.get(`http://localhost:9500/project/${currentRoute.params.projectId}`);
+    projectName.value = response.data.name;
+  } catch (error) {
+    console.error('Failed to fetch project name:', error);
+  }
+});
   </script>
   
   <style scoped>

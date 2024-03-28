@@ -44,7 +44,7 @@
 import { ref, computed, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import axios from 'axios';
-import Header from "./ProjectTemplateHeader.vue";
+import Header from "./Header.vue";
 
 const route = useRoute();
 const router = useRouter();
