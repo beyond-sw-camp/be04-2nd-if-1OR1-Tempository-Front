@@ -134,7 +134,7 @@
       <button class="btn btn-dark" @click="backToTableList">Back</button>
       <div>
         <button v-if="isReadOnly" class="btn btn-dark me-2" @click="toggleReadOnly">
-          Modify
+          Edit
         </button>
         <button v-else class="btn btn-dark me-2" @click="toggleReadOnly">
           Done
