@@ -7,13 +7,13 @@
 
     <div class="who-am-i">
       Name <br>
-      <input type="text" name="" id=""><br><br>
+      <input type="text" v-model="user.name" readonly><br><br>
 
       NickName <br>
-      <input type="text" name="" id=""><br><br>
+      <input type="text" v-model="user.nickname" readonly><br><br>
 
       E-mail <br>
-      <input type="email" name="" id=""><br><br>
+      <input type="email" v-model="user.email" readonly><br><br>
 
       <button class="edit" @click="goToEditMyPage">Edit</button>
       <button class="home" @click="goBack()">Back</button>
@@ -27,8 +27,24 @@
 </template>
 
 <script setup>
+import axios from 'axios'
+import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router';
 const router = useRouter();
+const user = ref(
+  {
+    name: '',
+    nickname: '',
+    email: ''
+  }
+);
+
+onMounted(async () => {
+  const res = await axios.get('http://localhost:9500/user/who-am-i');
+  user.value.name = res.data.name;
+  user.value.nickname = res.data.nickname;
+  user.value.email = res.data.email;
+});
 
 function goBack() {
   router.push('/projectlist');
