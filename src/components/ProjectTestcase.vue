@@ -82,9 +82,10 @@
     import Header from './ProjectTemplateHeader.vue'
     import axios from 'axios'
     import { onMounted, ref } from 'vue'
-    import {useRoute} from 'vue-router'
+    import { useRoute, useRouter  } from 'vue-router'
 
     const currentRoute = useRoute();
+    const router = useRouter();
     const tableData = ref([]);
 
     // axios를 이용하여 서버와 연결
@@ -157,9 +158,10 @@
     }
     
     function backToProject() {
+        console.log(router);
 
         // projectInfo 페이지로 이동(프로젝트id 추가 필요)
-        currentRoute.push('/projectInfo');
+        router.push('/projectInfo');
     }
 </script>
 
