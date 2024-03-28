@@ -66,7 +66,12 @@
             </td>
             <td>
               <span v-if="isReadOnly">{{ row.isNullable ? "O" : "X" }}</span>
-              <select v-else v-model="row.isNullable" class="form-select" @change="saveRow(row)">
+              <select
+                v-else
+                v-model="row.isNullable"
+                class="form-select"
+                @change="saveRow(row)"
+              >
                 <option value="true">O</option>
                 <option value="false">X</option>
               </select>
@@ -95,7 +100,12 @@
             </td>
             <td>
               <span v-if="isReadOnly">{{ row.dataType }}</span>
-              <select v-else v-model="row.dataType" class="form-select" @change="saveRow(row)">
+              <select
+                v-else
+                v-model="row.dataType"
+                class="form-select"
+                @change="saveRow(row)"
+              >
                 <option value="int">int</option>
                 <option value="bigint">bigint</option>
                 <option value="smallint">smallint</option>
@@ -207,23 +217,22 @@ const deleteRow = (index) => {
 
 const saveRow = async (row) => {
   try {
-    await axios.post('/api/row', row);
-    console.log('Row data saved successfully');
+    await axios.post("/definitionoftable", row);
+    console.log("Row data saved successfully");
   } catch (error) {
-    console.error('Error saving row data:', error);
+    console.error("Error saving row data:", error);
   }
 };
-
 
 const saveAllRows = async () => {
   try {
     for (const row of tableData.value) {
       await saveRow(row);
     }
-    console.log('All rows saved successfully');
+    console.log("All rows saved successfully");
     isReadOnly.value = true;
   } catch (error) {
-    console.error('Error saving rows:', error);
+    console.error("Error saving rows:", error);
   }
 };
 
