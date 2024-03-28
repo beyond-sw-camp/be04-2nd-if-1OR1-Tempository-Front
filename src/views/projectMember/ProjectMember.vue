@@ -27,7 +27,12 @@
    import {ref} from 'vue'
   import {RouterLink, RouterView} from 'vue-router';
   import Header from './Header.vue';
+  import { useRouter } from 'vue-router';
+  const router = useRouter();
 
+  function backToProjectList() {
+        router.push('/projectList');
+       }
   // const backToProjectList =
 
 

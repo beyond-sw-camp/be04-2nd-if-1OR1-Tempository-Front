@@ -37,7 +37,22 @@
       import {RouterLink, RouterView} from 'vue-router';
       import Header from './Header.vue';
       import { useRouter } from 'vue-router';
+      import {useRoute} from 'vue-router'
+      
+
        const router = useRouter();
+
+       const currentRoute = useRoute();
+       const projectId = currentRoute.params.id;
+      const projectName = currentRoute.query.projectName;
+
+        function manageProject() {
+        router.push({ path: `/manageProject/${projectId}`, query: { projectName }});
+       }
+
+       function backToProjectList() {
+        router.push('/projectList');
+       }
       
     
     

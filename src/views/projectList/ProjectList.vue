@@ -6,7 +6,7 @@
         <div class="project">
           <h2>{{ project.name }}</h2>
             <p>{{ project.content }}</p>
-        <button class="goProject" @click="goToProject(project.id)">Setting</button>
+        <button class="goProject" @click="goToProject(project.id, project.name)">Setting</button>
       </div>
 
     </div>
@@ -21,8 +21,8 @@
 
   const router = useRouter();
 
-  function goToProject(projectId) {
-    router.push(`/project/${projectId}`)
+  function goToProject(projectId,projectName) {
+    router.push({ path: `/project/${projectId}`, query: { projectName }})
   }
 
 const projects = ref([]);

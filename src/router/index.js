@@ -5,6 +5,7 @@ import SignUp from '@/views/signup/SignUp.vue';
 import MyPage from '@/views/mypage/MyPage.vue';
 import ProjectInfo from '@/views/projectView/ProjectInfo.vue';
 import ProjectMemberInfo from '@/views/projectView/ProjectMemberInfo.vue';
+import ManageProject from '@/views/projectMember/ProjectMember.vue';
 import ProjectWBS from '@/components/ProjectWBS.vue'
 import ProjectIssueBoard from '@/components/ProjectIssueBoard.vue'
 import ProjectIssueForm from '@/components/ProjectIssueForm.vue'
@@ -31,26 +32,34 @@ const router = createRouter({
         path: '/who-am-i',
         component: MyPage
       },
-      {
-        path: '/projectMemberInfo',
-        component: ProjectMemberInfo
-        
-      },
-      {
-          path: '/projectInfo',
-          component: ProjectInfo
 
+      {
+        path: '/manageProject/:id',
+        component: ManageProject,
+        props: true,
+        children:[
+          {
+            path: '/projectInfo',
+            component: ProjectInfo,
+            props: true
+        },      
+        {
+          path: '/projectMemberInfo/',
+          component: ProjectMemberInfo,
+          props: true
+          
+        }
+        ]
       },
+
       {
         path: '/project/:id',
         component: Project,
         props: true
-
       },
       {
         path: '/projectList',
         component: ProjectList
-
       },
 
       {
