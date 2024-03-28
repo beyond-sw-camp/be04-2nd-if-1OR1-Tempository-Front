@@ -23,7 +23,6 @@
 	<img src="https://img.shields.io/badge/SpringBoot-6DB33F?style&logo=SpringBoot&logoColor=white"/>
     <img src=" https://img.shields.io/badge/javascript-black?logo=javascript"/>
     <img src="https://img.shields.io/badge/Vue-black?logo=vuedotjs"/>
-    <img src="https://img.shields.io/badge/JPA-black?logo=jpa" />
 </div>
 
 <br>
@@ -55,8 +54,8 @@
 
 ---
 <details><summary>화면 스토리보드</summary>
-[View Flow]
-    <img src="https://github.com/beyond-sw-camp/be04-2nd-if-1OR1-Tempository-Front/blob/main/img/flow.jpg"/>
+[View Flow]<br>
+    <img src="https://github.com/beyond-sw-camp/be04-2nd-if-1OR1-Tempository-Front/blob/main/img/flow.png"/>
 </div>
 </details>
 
