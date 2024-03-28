@@ -7,6 +7,7 @@ import ProjectMemberInfo from '@/views/projectView/ProjectMemberInfo.vue';
 import ProjectWBS from '@/components/ProjectWBS.vue'
 import ProjectIssueBoard from '@/components/ProjectIssueBoard.vue'
 import ProjectIssueForm from '@/components/ProjectIssueForm.vue'
+import ProjectDefinitionOfTable from '@/components/ProjectDefinitionOfTable.vue'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -40,6 +41,11 @@ const router = createRouter({
           name: 'WBS',
           component: ProjectWBS
 
+      },
+      {
+        path: '/definitionoftable',
+        name: 'DefinitionOfTable',
+        component: ProjectDefinitionOfTable
       },
       {
           path: '/issue',
