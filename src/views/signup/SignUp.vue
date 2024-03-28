@@ -64,12 +64,21 @@ async function successSignUp() {
     password: newUser.password
   }
 
-  await axios.post(
+  try{
+    await axios.post(
     `http://localhost:9500/user/signup`,
     sendData
   )
 
   router.push('/');
+  } catch (error) {
+    if (error.response) {
+      statusNickname.value = error.response.status;
+      const errorMessage = '회원 가입 실패.\n닉네임/이메일 중복 여부를 확인해주세요.';
+      alert(errorMessage);
+    }
+  }
+  
 }
 
 async function checkNickname() {
