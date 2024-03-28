@@ -5,7 +5,7 @@
       <img src="@/assets/images/logo_mini.jpg">
     </div>
 
-    <div class="mypage">
+    <div class="who-am-i">
       Name <br>
       <input type="text" name="" id=""><br><br>
 
@@ -47,7 +47,7 @@ div.logo {
   margin-right: 100px;
 }
 
-div.mypage {
+div.who-am-i {
   font-size: 30px;
   align-items: center;
   align-self: auto;

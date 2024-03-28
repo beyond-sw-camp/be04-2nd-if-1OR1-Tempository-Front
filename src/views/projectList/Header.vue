@@ -6,7 +6,7 @@
       <h1>ProjectList</h1>
     </div>
     <div class="buttons">
-      <button class="mypage" @click="goToMyPage()">My Page</button>
+      <button class="who-am-i" @click="goToMyPage()">My Page</button>
       <button class="logout" @click="logout()">Log Out</button>
     </div>
   </div>
@@ -19,7 +19,7 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 
 function goToMyPage() {
-  router.push('/mypage')
+  router.push('/who-am-i')
 }
 
 function logout() {
@@ -29,7 +29,7 @@ function logout() {
 </script>
 
 <style scoped>
-button.mypage {
+button.who-am-i {
   background-color: gray;
   color: azure;
   border: 1px solid black;
