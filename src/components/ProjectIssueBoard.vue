@@ -10,15 +10,8 @@
               <div class="issue-card" @click="navigateToIssueView(issue)">
                 <div>{{ issue.title }}</div>
                 <div class="btn-group btn-group-sm">
-                  <button
-                    class="btn btn-dark"
-                    @click.stop="navigateToIssueForm(issue)"
-                  >
-                    Edit
-                  </button>
-                  <button class="btn btn-dark" @click.stop="deleteIssue(issue)">
-                    Delete
-                  </button>
+                  <button class="btn btn-dark" @click.stop="navigateToIssueForm(issue)">Edit</button>
+                  <button class="btn btn-dark" @click.stop="deleteIssue(issue)">Delete</button>
                 </div>
               </div>
             </div>
@@ -33,15 +26,8 @@
               <div class="issue-card" @click="navigateToIssueView(issue)">
                 <div>{{ issue.title }}</div>
                 <div class="btn-group btn-group-sm">
-                  <button
-                    class="btn btn-dark"
-                    @click.stop="navigateToIssueForm(issue)"
-                  >
-                    Edit
-                  </button>
-                  <button class="btn btn-dark" @click.stop="deleteIssue(issue)">
-                    Delete
-                  </button>
+                  <button class="btn btn-dark" @click.stop="navigateToIssueForm(issue)">Edit</button>
+                  <button class="btn btn-dark" @click.stop="deleteIssue(issue)">Delete</button>
                 </div>
               </div>
             </div>
@@ -56,15 +42,8 @@
               <div class="issue-card" @click="navigateToIssueView(issue)">
                 <div>{{ issue.title }}</div>
                 <div class="btn-group btn-group-sm">
-                  <button
-                    class="btn btn-dark"
-                    @click.stop="navigateToIssueForm(issue)"
-                  >
-                    Edit
-                  </button>
-                  <button class="btn btn-dark" @click.stop="deleteIssue(issue)">
-                    Delete
-                  </button>
+                  <button class="btn btn-dark" @click.stop="navigateToIssueForm(issue)">Edit</button>
+                  <button class="btn btn-dark" @click.stop="deleteIssue(issue)">Delete</button>
                 </div>
               </div>
             </div>
@@ -73,61 +52,41 @@
       </div>
     </div>
     <div class="mt-3 d-flex justify-content-between">
-      <button class="btn btn-dark" @click="backToProject">
-        Back to Project
-      </button>
-      <button class="btn btn-dark" @click="navigateToIssueForm()">
-        Add Issue
-      </button>
+      <button class="btn btn-dark" @click="backToProject">Back to Project</button>
+      <button class="btn btn-dark" @click="navigateToIssueForm()">Add Issue</button>
     </div>
   </div>
 </template>
 
 <script setup>
+import { computed } from 'vue';
+import { useRouter } from 'vue-router';
+import { useStore } from 'vuex';
+import ProjectIssueForm from './ProjectIssueForm.vue';
 import Header from "./ProjectTemplateHeader.vue";
-import { computed, onMounted } from "vue";
-import { useRouter } from "vue-router";
-import { useStore } from "vuex";
-import ProjectIssueForm from "./ProjectIssueForm.vue";
-
 
 const router = useRouter();
 const store = useStore();
-
-onMounted(() => {
-  store.dispatch("issue/fetchIssues");
-});
-
-const issues = computed(() => store.state.issues.issues);
-const todoIssues = computed(() =>
-  issues.value.filter((issue) => issue.status === "todo")
-);
-const inProgressIssues = computed(() =>
-  issues.value.filter((issue) => issue.status === "inprogress")
-);
-const doneIssues = computed(() =>
-  issues.value.filter((issue) => issue.status === "done")
-);
-
-const navigateToIssueView = (issue) => {
-  router.push({ name: "IssueView", params: { id: issue.id } });
-};
+const issues = computed(() => store.state.issues);
+const todoIssues = computed(() => issues.value.filter(issue => issue.status === 'todo'));
+const inProgressIssues = computed(() => issues.value.filter(issue => issue.status === 'inprogress'));
+const doneIssues = computed(() => issues.value.filter(issue => issue.status === 'done'));
 
 const navigateToIssueForm = (issue = null) => {
   if (issue) {
-    router.push({ name: "IssueEdit", params: { id: issue.id } });
+    router.push({ name: 'IssueEdit', params: { id: issue.id } });
   } else {
-    router.push({ name: "IssueNew" });
+    router.push({ name: 'IssueNew' });
   }
 };
 
 const deleteIssue = (issueToDelete) => {
-  store.dispatch("issues/deleteIssue", issueToDelete);
+  store.dispatch('deleteIssue', issueToDelete);
 };
 
 const backToProject = () => {
-  // Back to Project 버튼 클릭 시 동작할 내용 작성
-  console.log("Back to Project clicked");
+  // 여기에 Back to Project 버튼 클릭 시 동작할 내용 추가
+  console.log('Back to Project clicked');
 };
 </script>
 
