@@ -54,9 +54,17 @@
 <div align=left>
 
 ---
+<details><summary>화면 스토리보드</summary>
+[View Flow]
+    <img src="https://github.com/beyond-sw-camp/be04-2nd-if-1OR1-Tempository-Front/blob/main/img/flow.jpg"/>
+</div>
+</details>
 
-<h2>1. 화면 설계</h2>
-    [Home]<br>
+<br>
+
+<details>
+<summary>기능 설계서</summary>
+[Home]<br>
     (1) Header에 회원 가입과 로그인 페이지로 이동하는 버튼이 표시된다.<br>
     <img src="https://github.com/beyond-sw-camp/be04-2nd-if-1OR1-Tempository-Front/blob/main/img/Home.jpg"/>
     <br><br>
@@ -128,4 +136,13 @@
     (4) 이슈의 작성자를 확인할 수 있다.<br>
     <img src="https://github.com/beyond-sw-camp/be04-2nd-if-1OR1-Tempository-Front/blob/main/img/Project_IssueAdd.jpg"/>
 
-</div>
+
+</details>
+
+<br>
+
+<details>
+<summary>UI TEST</summary>
+
+
+</details>
