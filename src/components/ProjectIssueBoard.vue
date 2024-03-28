@@ -8,7 +8,7 @@
           <div class="card-body">
             <div v-for="issue in todoIssues" :key="issue.id">
               <div class="issue-card" @click="navigateToIssueView(issue)">
-                <div>{{ issue.title }}</div>
+                <div>{{ issue.name }}</div>
                 <div class="btn-group btn-group-sm">
                   <button class="btn btn-dark" @click.stop="navigateToIssueForm(issue)">Edit</button>
                   <button class="btn btn-dark" @click.stop="deleteIssue(issue)">Delete</button>
@@ -24,7 +24,7 @@
           <div class="card-body">
             <div v-for="issue in inProgressIssues" :key="issue.id">
               <div class="issue-card" @click="navigateToIssueView(issue)">
-                <div>{{ issue.title }}</div>
+                <div>{{ issue.name }}</div>
                 <div class="btn-group btn-group-sm">
                   <button class="btn btn-dark" @click.stop="navigateToIssueForm(issue)">Edit</button>
                   <button class="btn btn-dark" @click.stop="deleteIssue(issue)">Delete</button>
@@ -40,7 +40,7 @@
           <div class="card-body">
             <div v-for="issue in doneIssues" :key="issue.id">
               <div class="issue-card" @click="navigateToIssueView(issue)">
-                <div>{{ issue.title }}</div>
+                <div>{{ issue.name }}</div>
                 <div class="btn-group btn-group-sm">
                   <button class="btn btn-dark" @click.stop="navigateToIssueForm(issue)">Edit</button>
                   <button class="btn btn-dark" @click.stop="deleteIssue(issue)">Delete</button>
@@ -59,35 +59,70 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import { useRouter } from 'vue-router';
-import { useStore } from 'vuex';
-import ProjectIssueForm from './ProjectIssueForm.vue';
+import { ref, onMounted } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+import axios from 'axios';
 import Header from "./ProjectTemplateHeader.vue";
 
+const currentRoute = useRoute();
 const router = useRouter();
-const store = useStore();
-const issues = computed(() => store.state.issues);
-const todoIssues = computed(() => issues.value.filter(issue => issue.status === 'todo'));
-const inProgressIssues = computed(() => issues.value.filter(issue => issue.status === 'inprogress'));
-const doneIssues = computed(() => issues.value.filter(issue => issue.status === 'done'));
+const issues = ref([]);
+const todoIssues = ref([]);
+const inProgressIssues = ref([]);
+const doneIssues = ref([]);
+
+const projectName = ref(''); // 프로젝트 이름을 저장할 ref 변수
+
+onMounted(async () => {
+  try {
+    const response = await axios.get(`http://localhost:9500/issue/${currentRoute.params.projectId}`);
+    projectName.value = response.data.name;
+    issues.value = response.data.issueList;
+    filterIssues();
+  } catch (error) {
+    console.error('Failed to fetch issues:', error);
+  }
+});
+
+const filterIssues = () => {
+  todoIssues.value = issues.value.filter(issue => issue.status === '진행예정');
+  inProgressIssues.value = issues.value.filter(issue => issue.status === '진행중');
+  doneIssues.value = issues.value.filter(issue => issue.status === '진행완료');
+};
 
 const navigateToIssueForm = (issue = null) => {
   if (issue) {
-    router.push({ name: 'IssueEdit', params: { id: issue.id } });
+    router.push({ name: 'IssueEdit', params: { projectId: currentRoute.params.projectId, issueNo: issue.no } });
   } else {
-    router.push({ name: 'IssueNew' });
+    router.push({ name: 'IssueNew', params: { projectId: currentRoute.params.projectId } });
   }
 };
 
-const deleteIssue = (issueToDelete) => {
-  store.dispatch('deleteIssue', issueToDelete);
+const navigateToIssueView = (issue) => {
+  router.push({ 
+    name: 'IssueView', 
+    params: { projectId: currentRoute.params.projectId, issueNo: issue.no },
+    query: { issue: JSON.stringify(issue) }
+  });
 };
 
-const backToProject = () => {
-  // 여기에 Back to Project 버튼 클릭 시 동작할 내용 추가
-  console.log('Back to Project clicked');
+const deleteIssue = async (issueToDelete) => {
+  try {
+    await axios.delete(`http://localhost:9500/issue/remove/${currentRoute.params.projectId}`, {
+      data: {
+        no: issueToDelete.no
+      }
+    });
+    issues.value = issues.value.filter(issue => issue.no !== issueToDelete.no);
+    filterIssues();
+  } catch (error) {
+    console.error('Failed to delete issue:', error);
+  }
 };
+
+function backToProject() {
+  router.push(`/project/${currentRoute.params.projectId}`);
+}
 </script>
 
 <style scoped>

@@ -9,6 +9,7 @@ import ManageProject from '@/views/projectMember/ProjectMember.vue';
 import ProjectWBS from '@/components/ProjectWBS.vue'
 import ProjectIssueBoard from '@/components/ProjectIssueBoard.vue'
 import ProjectIssueForm from '@/components/ProjectIssueForm.vue'
+import ProjectIssueView from '@/components/ProjectIssueView.vue'
 import ProjectTableListView from '@/components/ProjectTableListView.vue'
 import ProjectTableDetailView from '@/components/ProjectTableDetailView.vue'
 import ProjectTableAddView from '@/components/ProjectTableAddView.vue'
@@ -85,23 +86,27 @@ const router = createRouter({
           component: ProjectWBS
 
       },
-      {
-          path: '/issue',
-          name: 'IssueBoard',
-          component: ProjectIssueBoard
+      { 
+        path: '/issue/:projectId', 
+        name: 'IssueBoard', 
+        component: ProjectIssueBoard 
       },
-      {
-          path: '/issue/new',
-          name: 'IssueNew',
-          component: ProjectIssueForm
+      { 
+        path: '/issue/:projectId/new', 
+        name: 'IssueNew', 
+        component: ProjectIssueForm 
       },
-      {
-          path: '/issue/:id',
-          name: 'IssueEdit',
-          component: ProjectIssueForm,
-          props: true
+      { 
+        path: '/issue/:projectId/:issueNo/edit', 
+        name: 'IssueEdit', 
+        component: ProjectIssueForm, 
+        props: true 
       },
-
+      { 
+        path: '/issue/:projectId/:issueNo', 
+        name: 'IssueView', 
+        component: ProjectIssueView
+      },
       {
           path: '/testcase/:id',
           name: 'Testcase',
