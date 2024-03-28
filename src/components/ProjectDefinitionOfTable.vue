@@ -21,82 +21,75 @@
           <tr v-for="(row, index) in tableData" :key="index">
             <td>{{ index + 1 }}</td>
             <td>
+              <span v-if="isReadOnly">{{ row.tableName }}</span>
               <input
-                v-if="!isReadOnly"
+                v-else
                 v-model="row.tableName"
                 type="text"
                 class="form-control"
                 placeholder="테이블 명"
               />
-              <span v-else>{{ row.tableName }}</span>
             </td>
             <td>
+              <span v-if="isReadOnly">{{ row.attributeName }}</span>
               <input
-                v-if="!isReadOnly"
+                v-else
                 v-model="row.attributeName"
                 type="text"
                 class="form-control"
                 placeholder="속성 명"
               />
-              <span v-else>{{ row.attributeName }}</span>
             </td>
             <td>
+              <span v-if="isReadOnly">{{ row.primaryKey }}</span>
               <input
-                v-if="!isReadOnly"
+                v-else
                 v-model="row.primaryKey"
                 type="text"
                 class="form-control"
                 placeholder="PK"
               />
-              <span v-else>{{ row.primaryKey }}</span>
             </td>
             <td>
+              <span v-if="isReadOnly">{{ row.foreignKey }}</span>
               <input
-                v-if="!isReadOnly"
+                v-else
                 v-model="row.foreignKey"
                 type="text"
                 class="form-control"
                 placeholder="FK"
               />
-              <span v-else>{{ row.foreignKey }}</span>
             </td>
             <td>
-              <select
-                v-if="!isReadOnly"
-                v-model="row.isNullable"
-                class="form-select"
-              >
+              <span v-if="isReadOnly">{{ row.isNullable ? "O" : "X" }}</span>
+              <select v-else v-model="row.isNullable" class="form-select">
                 <option value="true">O</option>
                 <option value="false">X</option>
               </select>
-              <span v-else>{{ row.isNullable ? "O" : "X" }}</span>
             </td>
             <td>
+              <span v-if="isReadOnly">{{ row.columnName }}</span>
               <input
-                v-if="!isReadOnly"
+                v-else
                 v-model="row.columnName"
                 type="text"
                 class="form-control"
                 placeholder="컬럼 명"
               />
-              <span v-else>{{ row.columnName }}</span>
             </td>
             <td>
+              <span v-if="isReadOnly">{{ row.defaultValue }}</span>
               <input
-                v-if="!isReadOnly"
+                v-else
                 v-model="row.defaultValue"
                 type="text"
                 class="form-control"
                 placeholder="기본값"
               />
-              <span v-else>{{ row.defaultValue }}</span>
             </td>
             <td>
-              <select
-                v-if="!isReadOnly"
-                v-model="row.dataType"
-                class="form-select"
-              >
+              <span v-if="isReadOnly">{{ row.dataType }}</span>
+              <select v-else v-model="row.dataType" class="form-select">
                 <option value="int">int</option>
                 <option value="bigint">bigint</option>
                 <option value="smallint">smallint</option>
@@ -113,17 +106,16 @@
                 <option value="time">time</option>
                 <option value="boolean">boolean</option>
               </select>
-              <span v-else>{{ row.dataType }}</span>
             </td>
             <td>
+              <span v-if="isReadOnly">{{ row.note }}</span>
               <input
-                v-if="!isReadOnly"
+                v-else
                 v-model="row.note"
                 type="text"
                 class="form-control"
                 placeholder="비고"
               />
-              <span v-else>{{ row.note }}</span>
             </td>
             <td v-if="!isReadOnly">
               <button class="btn btn-dark" @click="deleteRow(index)">
@@ -140,17 +132,17 @@
       </button>
       <div>
         <button
-          v-if="!isReadOnly"
+          v-if="isReadOnly"
           class="btn btn-dark me-2"
-          @click="isReadOnly = true"
+          @click="isReadOnly = false"
         >
+          Modify
+        </button>
+        <button v-else class="btn btn-dark me-2" @click="isReadOnly = true">
           Save
         </button>
         <button v-if="!isReadOnly" class="btn btn-dark" @click="addRow">
           Add Column
-        </button>
-        <button v-else class="btn btn-dark" @click="isReadOnly = false">
-          Modify
         </button>
       </div>
     </div>
@@ -158,7 +150,7 @@
 </template>
 
 <script setup>
-import Header from './ProjectTemplateHeader.vue';
+import Header from "./ProjectTemplateHeader.vue";
 import { ref } from "vue";
 
 const tableData = ref([
@@ -186,7 +178,7 @@ const tableData = ref([
   },
 ]);
 
-const isReadOnly = ref(false);
+const isReadOnly = ref(true);
 
 const addRow = () => {
   tableData.value.push({
