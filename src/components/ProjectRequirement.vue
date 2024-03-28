@@ -133,8 +133,9 @@
     }
     
     const backToProject = () => {
-        // Back to Project 버튼 클릭 시 동작할 내용 작성
-        console.log('Back to Project clicked')
+        
+        // projectInfo 페이지로 이동(프로젝트id 추가 필요)
+        router.push('/projectInfo');
     }
 </script>
 
