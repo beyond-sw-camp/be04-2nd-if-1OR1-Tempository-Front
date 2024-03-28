@@ -80,7 +80,7 @@ const router = createRouter({
         component: ProjectTableAddView
       },
       {
-          path: '/wbs',
+          path: '/wbs/:id',
           name: 'WBS',
           component: ProjectWBS
 
