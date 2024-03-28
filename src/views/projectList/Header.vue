@@ -1,34 +1,34 @@
 <template>
-
-      <br>
-      <div class="container">
-        <div></div>
-        <div class="project"><h1>ProjectList</h1></div>
-        <div class="buttons">
-        <button class="mypage" @click="goToMyPage()">My Page</button>
-        <button class="logout" @click="logout()">Log Out</button>
+  <br>
+  <div class="container">
+    <div></div>
+    <div class="project">
+      <h1>ProjectList</h1>
     </div>
-      </div>
-      <br>
+    <div class="buttons">
+      <button class="mypage" @click="goToMyPage()">My Page</button>
+      <button class="logout" @click="logout()">Log Out</button>
+    </div>
+  </div>
+  <br>
 
 </template>
 
 <script setup>
-  import {useRouter} from "vue-router";
-  const router = useRouter();
+import { useRouter } from "vue-router";
+const router = useRouter();
 
-  function goToMyPage() {
-    router.push('/mypage')
-  }
+function goToMyPage() {
+  router.push('/mypage')
+}
 
-  function logout() {
-    router.push('/logout')
-  }
+function logout() {
+  router.push('/')
+}
 
 </script>
 
 <style scoped>
-
 button.mypage {
   background-color: gray;
   color: azure;
@@ -38,8 +38,9 @@ button.mypage {
   text-decoration: none;
   display: inline-block;
   shape-margin: 5%;
-  
+
 }
+
 button.logout {
   background-color: gray;
   color: azure;
@@ -50,29 +51,29 @@ button.logout {
   display: inline-block;
   shape-margin: 5%;
 }
+
 .container {
-        width: 100%;
-        height: 100px;
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        border: 1px solid black;
-        margin-top: 30px;
-        margin-bottom: 30px;
-    }
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border: 1px solid black;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
 
-    .project {
-        width: 30%;
-        height: 100px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: black;
-        color: white;
-        border: 1px solid black;
-        margin-left: 180px;
-        margin-top: 30px;
-        margin-bottom: 30px;
-    }
-
+.project {
+  width: 30%;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  color: white;
+  border: 1px solid black;
+  margin-left: 180px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
 </style>

@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import Home from '@/views/home/Home.vue';
 import SignIn from '@/views/signin/SignIn.vue';
 import SignUp from '@/views/signup/SignUp.vue';
+import MyPage from '@/views/mypage/MyPage.vue';
 import ProjectInfo from '@/views/projectView/ProjectInfo.vue';
 import ProjectMemberInfo from '@/views/projectView/ProjectMemberInfo.vue';
 import ProjectWBS from '@/components/ProjectWBS.vue'
@@ -25,6 +26,10 @@ const router = createRouter({
       { 
         path: '/signup', 
         component: SignUp 
+      },
+      {
+        path: '/mypage',
+        component: MyPage
       },
       {
         path: '/projectMemberInfo',
