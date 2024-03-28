@@ -2,40 +2,13 @@
     <Header/>
 
     <div class="container">
-    <div class="project">
-      <div>
-        <h2>Projects_Name</h2>
-        <p>Project_Summarize</p>
+      <div class="projects" v-for="project in projects" :key="project.id">
+        <div class="project">
+          <h2>{{ project.name }}</h2>
+            <p>{{ project.content }}</p>
+        <button class="goProject" @click="goToProject(project.id)">Setting</button>
       </div>
-      <button class="goProject" @click="goToProjec()">Setting</button>
-    </div>
-    <div class="project">
-      <div>
-        <h2>Projects_Name</h2>
-        <p>Project_Summarize</p>
-      </div>
-      <button>Setting</button>
-    </div>
-    <div class="project">
-      <div>
-        <h2>Projects_Name</h2>
-        <p>Project_Summarize</p>
-      </div>
-      <button>Setting</button>
-    </div>
-    <div class="project">
-      <div>
-        <h2>Projects_Name</h2>
-        <p>Project_Summarize</p>
-      </div>
-      <button>Setting</button>
-    </div>
-    <div class="project">
-      <div>
-        <h2>Projects_Name</h2>
-        <p>Project_Summarize</p>
-      </div>
-      <button>Setting</button>
+
     </div>
   </div>
 </template>
@@ -43,11 +16,29 @@
 <script setup>
   import Header from './Header.vue';
   import { useRouter } from 'vue-router';
+  import { ref, onMounted } from 'vue';
+  import axios from 'axios';
+
   const router = useRouter();
 
-  function goToProjec() {
-    router.push('/project')
+  function goToProject(projectId) {
+    router.push(`/project/${projectId}`)
   }
+
+const projects = ref([]);
+
+onMounted(async () => {
+
+  try {
+    const response = await axios.get(`http://localhost:9500/project/myproject`)
+    // 요청이 성공했을 때 받은 데이터를 Vue 컴포넌트 데이터에 저장
+    projects.value = response.data.projects;
+  } catch (error) {
+    console.error('데이터를 받아오는 중 에러 발생:', error);
+  }
+});
+
+
 </script>
 
 <style scoped>
