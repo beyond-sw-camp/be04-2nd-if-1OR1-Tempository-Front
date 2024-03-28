@@ -169,6 +169,7 @@
 <script setup>
 import Header from "./ProjectTemplateHeader.vue";
 import { ref } from "vue";
+import axios from 'axios';
 
 const tableData = ref([
   {
@@ -214,10 +215,28 @@ const addRow = () => {
 const deleteRow = (index) => {
   tableData.value.splice(index, 1);
 };
+// 백엔드랑 연결되어야지 삭제 가능 -> 우선 주석 처리
+// const deleteRow = async (index) => {
+//   try {
+//     const rowToDelete = tableData.value[index];
+//     await axios.delete(`/definitionoftable/${rowToDelete.id}`);
+//     tableData.value.splice(index, 1);
+//     console.log('Row deleted successfully');
+//   } catch (error) {
+//     console.error('Error deleting row:', error);
+//   }
+// };
 
 const saveRow = async (row) => {
   try {
-    await axios.post("/definitionoftable", row);
+    if (row.id) {
+      // 기존 행 업데이트
+      await axios.put(`/definitionoftable/${row.id}`, row);
+    } else {
+      // 새 행 생성
+      const response = await axios.post("/definitionoftable", row);
+      row.id = response.data.id; // 서버에서 할당된 id 값 업데이트
+    }
     console.log("Row data saved successfully");
   } catch (error) {
     console.error("Error saving row data:", error);
