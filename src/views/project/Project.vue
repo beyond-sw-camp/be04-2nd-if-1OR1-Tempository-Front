@@ -2,20 +2,20 @@
     <Header></Header>
     <div class="project-container">
         <main>
-            <div class="project-button">
-              <h4><RouterLink to="/projectInfo" active-class="active">Requirement</RouterLink></h4>
+          <div class="project-button">
+              <h4><RouterLink to="/requirement" active-class="active">Requirement</RouterLink></h4>
               </div>
               <div class="project-button">
-              <h4><RouterLink to="/projectMemberInfo" active-class="active">WBS</RouterLink></h4>
+              <h4><RouterLink to="/wbs" active-class="active">WBS</RouterLink></h4>
             </div>
             <div class="project-button">
-              <h4><RouterLink to="/projectMemberInfo" active-class="active">Definition Of Table</RouterLink></h4>
+              <h4><RouterLink to="/definitionOfTable" active-class="active">Definition Of Table</RouterLink></h4>
             </div>
             <div class="project-button">
-              <h4><RouterLink to="/projectMemberInfo" active-class="active">Test Case</RouterLink></h4>
+              <h4><RouterLink to="/testcase" active-class="active">Test Case</RouterLink></h4>
             </div>
             <div class="project-button">
-              <h4><RouterLink to="/projectMemberInfo" active-class="active">Issue</RouterLink></h4>
+              <h4><RouterLink to="/issue" active-class="active">Issue</RouterLink></h4>
             </div>
         </main>
         <main2>
@@ -36,7 +36,9 @@
        import {ref} from 'vue'
       import {RouterLink, RouterView} from 'vue-router';
       import Header from './Header.vue';
-    
+      import { useRouter } from 'vue-router';
+       const router = useRouter();
+      
     
     
        </script>
@@ -96,6 +98,8 @@
         text-decoration: none;
         color: black;
        }
-       
+       main.button {
+        color : black;
+       }
     
        </style>

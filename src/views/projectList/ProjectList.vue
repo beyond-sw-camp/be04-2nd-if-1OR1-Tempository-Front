@@ -7,7 +7,7 @@
         <h2>Projects_Name</h2>
         <p>Project_Summarize</p>
       </div>
-      <button>Setting</button>
+      <button class="goProject" @click="goToProjec()">Setting</button>
     </div>
     <div class="project">
       <div>
@@ -42,6 +42,12 @@
 
 <script setup>
   import Header from './Header.vue';
+  import { useRouter } from 'vue-router';
+  const router = useRouter();
+
+  function goToProjec() {
+    router.push('/project')
+  }
 </script>
 
 <style scoped>
