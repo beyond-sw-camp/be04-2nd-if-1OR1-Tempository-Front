@@ -7,10 +7,10 @@
 
     <div class="signin">
       E-mail <br>
-      <input type="email"><br><br><br>
+      <input type="email" v-model="user.email"><br><br><br>
 
       Password <br>
-      <input type="password"><br><br><br>
+      <input type="password" v-model="user.password"><br><br><br>
       <button class="signin" @click="goToProjectList()">Sign In</button>
       <button class="home" @click="goToHome()">Home</button>
     </div>
@@ -25,10 +25,28 @@
 </template>
 
 <script setup>
+import axios from 'axios'
 import { useRouter } from 'vue-router';
 const router = useRouter();
+const user = {
+    name: '',
+    nickname: '',
+    email: '',
+    password: ''
+  };
 
-function goToProjectList() {
+async function goToProjectList() {
+  const sendData = {
+    email: user.email,
+    password: user.password
+  }
+
+  await axios.post(
+    `http://localhost:9500/user/signin`,
+    sendData
+  )
+
+
   router.push('/projectList');
 }
 
