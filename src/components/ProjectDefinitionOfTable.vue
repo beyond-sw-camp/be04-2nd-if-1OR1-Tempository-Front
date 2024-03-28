@@ -28,6 +28,7 @@
                 type="text"
                 class="form-control"
                 placeholder="테이블 명"
+                @change="saveRow(row)"
               />
             </td>
             <td>
@@ -38,6 +39,7 @@
                 type="text"
                 class="form-control"
                 placeholder="속성 명"
+                @change="saveRow(row)"
               />
             </td>
             <td>
@@ -48,6 +50,7 @@
                 type="text"
                 class="form-control"
                 placeholder="PK"
+                @change="saveRow(row)"
               />
             </td>
             <td>
@@ -58,11 +61,12 @@
                 type="text"
                 class="form-control"
                 placeholder="FK"
+                @change="saveRow(row)"
               />
             </td>
             <td>
               <span v-if="isReadOnly">{{ row.isNullable ? "O" : "X" }}</span>
-              <select v-else v-model="row.isNullable" class="form-select">
+              <select v-else v-model="row.isNullable" class="form-select" @change="saveRow(row)">
                 <option value="true">O</option>
                 <option value="false">X</option>
               </select>
@@ -75,6 +79,7 @@
                 type="text"
                 class="form-control"
                 placeholder="컬럼 명"
+                @change="saveRow(row)"
               />
             </td>
             <td>
@@ -85,11 +90,12 @@
                 type="text"
                 class="form-control"
                 placeholder="기본값"
+                @change="saveRow(row)"
               />
             </td>
             <td>
               <span v-if="isReadOnly">{{ row.dataType }}</span>
-              <select v-else v-model="row.dataType" class="form-select">
+              <select v-else v-model="row.dataType" class="form-select" @change="saveRow(row)">
                 <option value="int">int</option>
                 <option value="bigint">bigint</option>
                 <option value="smallint">smallint</option>
@@ -115,6 +121,7 @@
                 type="text"
                 class="form-control"
                 placeholder="비고"
+                @change="saveRow(row)"
               />
             </td>
             <td v-if="!isReadOnly">
@@ -138,7 +145,7 @@
         >
           Modify
         </button>
-        <button v-else class="btn btn-dark me-2" @click="isReadOnly = true">
+        <button v-else class="btn btn-dark me-2" @click="saveAllRows">
           Save
         </button>
         <button v-if="!isReadOnly" class="btn btn-dark" @click="addRow">
@@ -196,6 +203,28 @@ const addRow = () => {
 
 const deleteRow = (index) => {
   tableData.value.splice(index, 1);
+};
+
+const saveRow = async (row) => {
+  try {
+    await axios.post('/api/row', row);
+    console.log('Row data saved successfully');
+  } catch (error) {
+    console.error('Error saving row data:', error);
+  }
+};
+
+
+const saveAllRows = async () => {
+  try {
+    for (const row of tableData.value) {
+      await saveRow(row);
+    }
+    console.log('All rows saved successfully');
+    isReadOnly.value = true;
+  } catch (error) {
+    console.error('Error saving rows:', error);
+  }
 };
 
 const backToProject = () => {
