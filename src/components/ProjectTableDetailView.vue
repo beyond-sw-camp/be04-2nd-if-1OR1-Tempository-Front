@@ -2,27 +2,7 @@
   <div class="container">
     <Header :projectName="projectName"></Header>
     <div class="table-header">
-      <input
-        v-model="table.tableName"
-        type="text"
-        class="form-control"
-        placeholder="테이블 명"
-        :readonly="isTableNameReadOnly"
-      />
-      <button
-        v-if="!isTableNameReadOnly"
-        class="btn btn-dark ms-2"
-        @click="saveTableName"
-      >
-        Save Table Name
-      </button>
-      <button
-        v-if="isTableNameReadOnly"
-        class="btn btn-dark ms-2"
-        @click="toggleTableNameReadOnly"
-      >
-        Edit
-      </button>
+      <h3>{{ tableName }}</h3>
     </div>
     <div class="table-responsive">
       <table class="table table-bordered">
@@ -54,7 +34,7 @@
               />
             </td>
             <td>
-              <span v-if="row.isReadOnly">{{ row.primaryKey ? 'O' : 'X' }}</span>
+              <span v-if="row.isReadOnly">{{ row.primaryKey ? "O" : "X" }}</span>
               <select v-else v-model="row.primaryKey" class="form-select">
                 <option :value="true">O</option>
                 <option :value="false">X</option>
@@ -71,7 +51,7 @@
               />
             </td>
             <td>
-              <span v-if="row.isReadOnly">{{ row.nullAble ? 'O' : 'X' }}</span>
+              <span v-if="row.isReadOnly">{{ row.nullAble ? "O" : "X" }}</span>
               <select v-else v-model="row.nullAble" class="form-select">
                 <option :value="true">O</option>
                 <option :value="false">X</option>
@@ -168,54 +148,56 @@
 </template>
 
 <script setup>
-import axios from 'axios';
-import Header from './Header.vue';
-import { onMounted, ref } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import axios from "axios";
+import Header from "./Header.vue";
+import { onMounted, ref } from "vue";
+import { useRoute, useRouter } from "vue-router";
 
 const currentRoute = useRoute();
 const router = useRouter();
 
 const table = ref({
   tableNo: null,
-  tableName: '',
   columns: [],
 });
 
+const tableName = ref("");
 const isReadOnly = ref(true);
-const isTableNameReadOnly = ref(true);
-const projectName = ref('');
+const projectName = ref("");
 
 onMounted(async () => {
-  if (currentRoute.params.tableNo === 'new') {
+  if (currentRoute.params.tableNo === "new") {
     isReadOnly.value = false;
-    isTableNameReadOnly.value = false;
     createNewTable();
   } else {
     await fetchTableDetails();
   }
-  
+
   try {
-    const response = await axios.get(`http://localhost:9500/project/${currentRoute.params.projectId}`);
+    const response = await axios.get(
+      `http://localhost:9500/project/${currentRoute.params.projectId}`
+    );
     projectName.value = response.data.name;
   } catch (error) {
-    console.error('Failed to fetch project name:', error);
+    console.error("Failed to fetch project name:", error);
   }
 });
 
 const fetchTableDetails = async () => {
   try {
-    const response = await axios.get(`http://localhost:9500/table/${currentRoute.params.projectId}/${currentRoute.params.tableNo}`);
+    const response = await axios.get(
+      `http://localhost:9500/table/${currentRoute.params.projectId}/${currentRoute.params.tableNo}`
+    );
     table.value = {
       tableNo: response.data.tableNo,
-      tableName: response.data.tableName,
-      columns: response.data.tableDetailVOList.map(column => ({
+      columns: response.data.tableDetailVOList.map((column) => ({
         ...column,
         isReadOnly: isReadOnly.value,
       })),
     };
+    tableName.value = response.data.tableName;
   } catch (error) {
-    console.error('Error fetching table details:', error);
+    console.error("Error fetching table details:", error);
   }
 };
 
@@ -223,14 +205,14 @@ const createNewTable = () => {
   table.value.columns = [
     {
       propertyNo: 1,
-      propertyName: '',
+      propertyName: "",
       primaryKey: false,
-      foreignKey: '',
+      foreignKey: "",
       nullAble: true,
-      columnName: '',
-      defaultValue: '',
-      dataType: 'int',
-      note: '',
+      columnName: "",
+      defaultValue: "",
+      dataType: "int",
+      note: "",
       isReadOnly: false,
     },
   ];
@@ -238,22 +220,25 @@ const createNewTable = () => {
 
 const addRow = async () => {
   const newRow = {
-    propertyName: '',
+    propertyName: "",
     primaryKey: false,
-    foreignKey: '',
+    foreignKey: "",
     nullAble: true,
-    columnName: '',
-    defaultValue: '',
-    dataType: 'int',
-    note: '',
+    columnName: "",
+    defaultValue: "",
+    dataType: "int",
+    note: "",
     isReadOnly: false,
   };
   try {
-    const response = await axios.post(`http://localhost:9500/table/add/${currentRoute.params.projectId}/${currentRoute.params.tableNo}`, newRow);
+    const response = await axios.post(
+      `http://localhost:9500/table/add/${currentRoute.params.projectId}/${currentRoute.params.tableNo}`,
+      newRow
+    );
     newRow.propertyNo = response.data.propertyNo;
     table.value.columns.push(newRow);
   } catch (error) {
-    console.error('Error adding row:', error);
+    console.error("Error adding row:", error);
   }
 };
 
@@ -270,29 +255,34 @@ const saveRow = async (row) => {
     note: row.note,
   };
   try {
-    await axios.put(`http://localhost:9500/table/modify/${currentRoute.params.projectId}/${currentRoute.params.tableNo}`, updatedRow);
-    console.log('Row saved successfully');
+    await axios.put(
+      `http://localhost:9500/table/modify/${currentRoute.params.projectId}/${currentRoute.params.tableNo}`,
+      updatedRow
+    );
+    console.log("Row saved successfully");
     row.isReadOnly = true;
   } catch (error) {
-    console.error('Error saving row:', error);
+    console.error("Error saving row:", error);
   }
 };
 
 const deleteRow = async (propertyNo) => {
   try {
-    await axios.delete(`http://localhost:9500/table/remove/${currentRoute.params.projectId}/${currentRoute.params.tableNo}`, {
-      data: { propertyNo },
-    });
+    await axios.delete(
+      `http://localhost:9500/table/remove/${currentRoute.params.projectId}/${currentRoute.params.tableNo}`,
+      {
+        data: { propertyNo },
+      }
+    );
     await fetchTableDetails();
   } catch (error) {
-    console.error('Error deleting row:', error);
+    console.error("Error deleting row:", error);
   }
 };
 
 const toggleReadOnly = () => {
   isReadOnly.value = !isReadOnly.value;
-  isTableNameReadOnly.value = isReadOnly.value;
-  table.value.columns = table.value.columns.map(column => ({
+  table.value.columns = table.value.columns.map((column) => ({
     ...column,
     isReadOnly: isReadOnly.value,
   }));
@@ -300,23 +290,6 @@ const toggleReadOnly = () => {
 
 const toggleRowReadOnly = (row) => {
   row.isReadOnly = !row.isReadOnly;
-};
-
-const toggleTableNameReadOnly = () => {
-  isTableNameReadOnly.value = !isTableNameReadOnly.value;
-};
-
-const saveTableName = async () => {
-  try {
-    await axios.put(`http://localhost:9500/table/modify/${currentRoute.params.projectId}/${currentRoute.params.tableNo}`, {
-      tableName: table.value.tableName,
-    });
-    console.log('Table name saved successfully');
-    isTableNameReadOnly.value = true;
-    await fetchTableDetails();
-  } catch (error) {
-    console.error('Error saving table name:', error);
-  }
 };
 
 const backToTableList = () => {
