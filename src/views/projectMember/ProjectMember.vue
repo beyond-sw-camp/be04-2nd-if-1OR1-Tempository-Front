@@ -3,10 +3,10 @@
 <div class="project-container">
     <main>
         <div class="project-button">
-          <h2><RouterLink to="/projectInfo" active-class="active">Project Info</RouterLink></h2>
+          <h2><RouterLink :to="{ path: `/projectInfo/${projectId}`, query: { projectName } }" active-class="active">Project Info</RouterLink></h2>
           </div>
           <div class="project-button">
-          <h2><RouterLink to="/projectMemberInfo" active-class="active">Project Member</RouterLink></h2>
+          <h2><RouterLink :to="{ path: `/projectMemberInfo/${projectId}`, query: { projectName } }" active-class="active">Project Member</RouterLink></h2>
         </div>
     </main>
     <main2>
@@ -26,7 +26,14 @@
   import {RouterLink, RouterView} from 'vue-router';
   import Header from './Header.vue';
   import { useRouter } from 'vue-router';
+  import {useRoute} from 'vue-router'
+
+
   const router = useRouter();
+
+  const currentRoute = useRoute();
+  const projectId = currentRoute.params.id;
+  const projectName = currentRoute.query.projectName;
 
   function backToProjectList() {
         router.push('/projectList');

@@ -43,7 +43,7 @@
 
        const currentRoute = useRoute();
        const projectId = currentRoute.params.id;
-      const projectName = currentRoute.query.projectName;
+       const projectName = currentRoute.query.projectName;
 
         function manageProject() {
         router.push({ path: `/manageProject/${projectId}`, query: { projectName }});

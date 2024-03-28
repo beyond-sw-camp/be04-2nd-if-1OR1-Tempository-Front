@@ -10,6 +10,7 @@
 const currentRoute = useRoute();
 const projectName = currentRoute.query.projectName;
 
+
 </script>
     
 <style scoped>

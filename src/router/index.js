@@ -39,12 +39,12 @@ const router = createRouter({
         props: true,
         children:[
           {
-            path: '/projectInfo',
+            path: '/projectInfo/:id',
             component: ProjectInfo,
             props: true
         },      
         {
-          path: '/projectMemberInfo/',
+          path: '/projectMemberInfo/:id',
           component: ProjectMemberInfo,
           props: true
           
