@@ -140,10 +140,7 @@
         await axios.post(
             `http://localhost:9500/testcase/save/${currentRoute.params.id}`, 
             sendData
-        ); 
-        console.log('Data saved to DB successfully');
-
-        console.log(tableData.value);
+        );
         
         this.isReadOnly = true;
     }
@@ -158,7 +155,6 @@
     }
     
     function backToProject() {
-        console.log(router);
 
         // projectInfo 페이지로 이동(프로젝트id 추가 필요)
         router.push('/projectInfo');
