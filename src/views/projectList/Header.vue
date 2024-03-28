@@ -15,6 +15,7 @@
 </template>
 
 <script setup>
+import axios from 'axios'
 import { useRouter } from "vue-router";
 const router = useRouter();
 
@@ -22,7 +23,12 @@ function goToMyPage() {
   router.push('/who-am-i')
 }
 
-function logout() {
+async function logout() {
+
+  await axios.get(
+    `http://localhost:9500/user/logout`
+  )
+
   router.push('/')
 }
 
