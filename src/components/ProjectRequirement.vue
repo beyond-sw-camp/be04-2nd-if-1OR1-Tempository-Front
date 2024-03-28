@@ -72,13 +72,24 @@
 <script setup>
     import Header from './ProjectTemplateHeader.vue'
     import { onMounted, ref } from 'vue'
-    import requirementdummy from '@/testjson/requirementdummy.json'
+    import { useRoute, useRouter  } from 'vue-router'
+    import axios from 'axios'
+
+    const currentRoute = useRoute();
+    const router = useRouter();
 
     const tableData = ref([]);
     
-    // 현재 json 파일로 불러옴 서버로 변경 필요
-    onMounted(() => {
-        tableData.value = requirementdummy.requirementVOList;
+    // axios를 이용하여 서버와 연결
+    onMounted(async () =>{
+        try {
+            const response = await axios.get(`http://localhost:9500/requirement/${currentRoute.params.id}`);
+            const data = response.data;
+            tableData.value = data.requirementVOList;
+
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
     });
     
     const fields = ref([
