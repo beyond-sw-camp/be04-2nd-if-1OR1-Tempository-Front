@@ -4,7 +4,6 @@
     <main>
         <div class="project-button">
           <h2><RouterLink to="/projectInfo" active-class="active">Project Info</RouterLink></h2>
-          <p>{{ projectInfo }}</p>
           </div>
           <div class="project-button">
           <h2><RouterLink to="/projectMemberInfo" active-class="active">Project Member</RouterLink></h2>
@@ -24,7 +23,6 @@
   </template>
    
    <script setup>
-   import {ref} from 'vue'
   import {RouterLink, RouterView} from 'vue-router';
   import Header from './Header.vue';
   import { useRouter } from 'vue-router';
@@ -33,7 +31,6 @@
   function backToProjectList() {
         router.push('/projectList');
        }
-  // const backToProjectList =
 
 
    </script>

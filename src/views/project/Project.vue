@@ -3,19 +3,19 @@
     <div class="project-container">
         <main>
           <div class="project-button">
-              <h4><RouterLink to="/requirement" active-class="active">Requirement</RouterLink></h4>
+              <h4><RouterLink :to="{ path: `/requirement/${projectId}`, query: { projectName } }" active-class="active">Requirement</RouterLink></h4>
               </div>
               <div class="project-button">
-              <h4><RouterLink to="/wbs" active-class="active">WBS</RouterLink></h4>
+              <h4><RouterLink :to="{ path: `/wbs/${projectId}`, query: { projectName } }" active-class="active">WBS</RouterLink></h4>
             </div>
             <div class="project-button">
-              <h4><RouterLink to="/definitionOfTable" active-class="active">Definition Of Table</RouterLink></h4>
+              <h4><RouterLink :to="{ path: `/definitionoftable/${projectId}`, query: { projectName } }" active-class="active">Definition Of Table</RouterLink></h4>
             </div>
             <div class="project-button">
-              <h4><RouterLink to="/testcase" active-class="active">Test Case</RouterLink></h4>
+              <h4><RouterLink :to="{ path: `/testcase/${projectId}`, query: { projectName } }" active-class="active">Test Case</RouterLink></h4>
             </div>
             <div class="project-button">
-              <h4><RouterLink to="/issue" active-class="active">Issue</RouterLink></h4>
+              <h4><RouterLink :to="{ path: `/issue/${projectId}`, query: { projectName } }" active-class="active">Issue</RouterLink></h4>
             </div>
         </main>
         <main2>
@@ -33,7 +33,6 @@
       </template>
        
        <script setup>
-       import {ref} from 'vue'
       import {RouterLink, RouterView} from 'vue-router';
       import Header from './Header.vue';
       import { useRouter } from 'vue-router';
