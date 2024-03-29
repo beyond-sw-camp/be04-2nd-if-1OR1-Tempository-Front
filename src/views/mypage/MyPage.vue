@@ -17,6 +17,8 @@
 
       <button class="edit" @click=goToEditMyPage()>Edit</button>
       <button class="home" @click="goBack()">Back</button>
+      <br>
+      <button class="editPassword" @click=goToEditPassword()>Edit Password</button>
     </div>
 
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
@@ -80,6 +82,10 @@ function goToEditMyPage() {
 function goBack() {
   router.push('/projectlist');
 }
+
+function goToEditPassword() {
+  router.push("/edit-password");
+}
 </script>
 
 <style scoped>
@@ -121,5 +127,15 @@ button.edit {
   background-color: black;
   color: white;
   border: none;
+}
+button.editPassword {
+  text-align: center;
+  font-size: 20px;
+  width: 150px;
+  height: 4%;
+  background-color: black;
+  color: white;
+  border: none;
+  margin-right: 200px;
 }
 </style>
