@@ -93,6 +93,32 @@
             console.error('Error fetching data:', error);
         }
     });
+
+    // 에러 처리 함수
+    function handleErrorMessage(error) {
+        if (error.response && error.response.status === 400) {
+            const errorMessage = error.response.data.message;
+            // 에러 메시지를 알림창으로 표시
+            alert(errorMessage);
+            // 로그인 페이지로 리다이렉트
+            router.push('/signin'); // 로그인 페이지 경로로 변경해주세요
+        }
+    }
+
+    async function fetchData() {
+        try {
+            const response = await axios.get(`http://localhost:9500/requirement/${currentRoute.params.id}`);
+                const data = response.data;s
+                tableData.value = data.requirementVOList;
+        } catch (error) {
+            handleErrorMessage(error);
+        }
+    }
+
+    onMounted(() => {
+    // 페이지가 마운트되면 데이터를 가져옵니다.
+    fetchData();
+    });
     
     const fields = ref([
         { key: 'no', label: 'No'},
