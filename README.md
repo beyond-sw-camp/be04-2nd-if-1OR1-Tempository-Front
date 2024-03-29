@@ -251,35 +251,47 @@
     (2) 프로젝트 시작 시, 필요한 WBS를 수정할 수 있다.<br>
     (3) 프로젝트 시작 시, 필요한 WBS를 조회할 수 있다.<br>
     (4) 프로젝트 시작 시, 필요한 WBS를 삭제할 수 있다.<br>
-    <img src="https://github.com/beyond-sw-camp/be04-2nd-if-1OR1-Tempository-Front/blob/main/img/Project_WBS.jpg"/>
+    <img src="https://github.com/beyond-sw-camp/be04-2nd-if-1OR1-Tempository-Front/blob/main/img/Project_WBS_Read.png"/>
+    <img src="https://github.com/beyond-sw-camp/be04-2nd-if-1OR1-Tempository-Front/blob/main/img/Project_WBS_Edit.png"/>
+    <br><br>
+    [요구사항문서]<br>
+    (1) 요구사항 문서를 작성할 수 있다.<br>
+    (2) 요구사항 문서를 수정할 수 있다.<br>
+    (3) 요구사항 문서를 조회할 수 있다.<br>
+    (4) 요구사항 문서를 삭제할 수 있다.<br>
+    <img src="https://github.com/beyond-sw-camp/be04-2nd-if-1OR1-Tempository-Front/blob/main/img/Project_Requirement_Read.png"/>
+    <img src="https://github.com/beyond-sw-camp/be04-2nd-if-1OR1-Tempository-Front/blob/main/img/Project_Requirement_Edit.png"/>
     <br><br>
     [테이블 정의서(테이블 목록)]<br>
     (1) 테이블 정의서의 하위 테이블들을 작성할 수 있다.<br>
     (2) 테이블 정의서의 하위 테이블들을 수정할 수 있다.<br>
     (3) 테이블 정의서의 하위 테이블들을 조회할 수 있다.<br>
     (4) 테이블 정의서의 하위 테이블들을 삭제할 수 있다.<br>
-    <img src="https://github.com/beyond-sw-camp/be04-2nd-if-1OR1-Tempository-Front/blob/main/img/Project_DefinitionOfTable.jpg"/>
+    <img src="https://github.com/beyond-sw-camp/be04-2nd-if-1OR1-Tempository-Front/blob/main/img/Project_Table.png"/>
+    <img src="https://github.com/beyond-sw-camp/be04-2nd-if-1OR1-Tempository-Front/blob/main/img/Project_Table_Add.png"/>
     <br><br>
     [테스트 케이스]<br>
     (1) 프로젝트 진행 중 기능명세에 따른 테스트를 작성할 수 있다.<br>
     (2) 프로젝트 진행 중 기능명세에 따른 테스트를 수정할 수 있다.<br>
     (3) 프로젝트 진행 중 기능명세에 따른 테스트를 조회할 수 있다.<br>
     (4) 프로젝트 진행 중 기능명세에 따른 테스트를 삭제할 수 있다.<br>
-    <img src="https://github.com/beyond-sw-camp/be04-2nd-if-1OR1-Tempository-Front/blob/main/img/Project_TestCase.jpg"/>
+    <img src="https://github.com/beyond-sw-camp/be04-2nd-if-1OR1-Tempository-Front/blob/main/img/Project_TestCase_Read.png"/>
+    <img src="https://github.com/beyond-sw-camp/be04-2nd-if-1OR1-Tempository-Front/blob/main/img/Project_TestCase_Edit.jpg"/>
     <br><br>
     [이슈]<br>
     (1) 이슈들의 진행현황과 목록을 조회할 수 있다.<br>
     (2) 이슈를 등록하는 페이지로 이동할 수 있다.<br>
     (3) 이슈를 클릭하면 이슈 상세 페이지로 이동할 수 있다.<br>
     (4) 이슈를 등록하는 페이지로 이동할 수 있다.<br>
-    <img src="https://github.com/beyond-sw-camp/be04-2nd-if-1OR1-Tempository-Front/blob/main/img/Project_Issue.jpg"/>
+    <img src="https://github.com/beyond-sw-camp/be04-2nd-if-1OR1-Tempository-Front/blob/main/img/Project_Issue.png"/>
     <br><br>
     [이슈 등록]<br>
     (1) 이슈에 대한 상세 내용을 확인할 수 있다.<br>
     (2) 이슈의 진행상황을 확인할 수 있다.<br>
     (3) 이슈의 담당자를 확인할 수 있다.<br>
     (4) 이슈의 작성자를 확인할 수 있다.<br>
-    <img src="https://github.com/beyond-sw-camp/be04-2nd-if-1OR1-Tempository-Front/blob/main/img/Project_IssueAdd.jpg"/>
+    <img src="https://github.com/beyond-sw-camp/be04-2nd-if-1OR1-Tempository-Front/blob/main/img/Project_Issue_Add.png"/>
+    <img src="https://github.com/beyond-sw-camp/be04-2nd-if-1OR1-Tempository-Front/blob/main/img/Project_Issue_Edit.png"/>
 
 
 </details>
