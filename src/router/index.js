@@ -15,6 +15,7 @@ import ProjectTableDetailView from '@/components/ProjectTableDetailView.vue'
 import ProjectTableAddView from '@/components/ProjectTableAddView.vue'
 import ProjectList from '@/views/projectList/ProjectList.vue'
 import Project from '@/views/project/Project.vue'
+import EditMyInfo from '@/views/mypage/EditMyInfo.vue';
 
 const router = createRouter({
   history: createWebHistory(),
@@ -117,7 +118,12 @@ const router = createRouter({
         path: '/requirement/:id',
         name: 'Requirement',
         component: () => import('@/components/ProjectRequirement.vue')
-    }
+      },
+      {
+        path: '/edit-my-info',
+        name: 'EditMyInfo',
+        component: EditMyInfo
+      }
     ]
 });
 
