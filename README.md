@@ -54,16 +54,6 @@
 <div align=left>
 
 ---
-<details><summary>스토리보드</summary>
-	
-[Storyboard](https://github.com/beyond-sw-camp/be04-2nd-if-1OR1-Tempository-Front/blob/main/docs/Tempository_storyboard.pdf)
-<br><br>
-[View Flow]<br>
-    <img src="https://github.com/beyond-sw-camp/be04-2nd-if-1OR1-Tempository-Front/blob/main/img/flow.png"/>
-</div>
-</details>
-
-<br>
 
 <details>
 <summary>기능 명세서</summary>
@@ -171,15 +161,15 @@
   - [x] 각 요구사항명세서는 번호, 분류, 이름, 내용, 메모를 포함한다.
 - [x] 요구사항명세서를 추가할 수 있다.
   - [x] 분류, 이름, 내용, 메모 를 포함한다.
-  - [x] 요구분석명세서의 id 와 번호는 Auto Increament되어 생성된다.
+  - [x] 요구사항명세서의 id 와 번호는 Auto Increament되어 생성된다.
 - [x] 한 번에 여러 요구사항명세서를 추가할 수 있다.
   - [x] json의 []를 이용해 여러 요구사항명세서를 묶어 요청시 한 번에 저장된다.
-- [x] 요구분석명세서를 수정할 수 있다.
-  - [x] 프로젝트 id와 요구분석명세서 번호를 통해 지정하여 수정한다.
+- [x] 요구사항명세서를 수정할 수 있다.
+  - [x] 프로젝트 id와 요구사항명세서 번호를 통해 지정하여 수정한다.
   - [x] 분류, 이름, 내용, 메모 를 수정할 수 있다.
   - [x] 존재하지 않는 요구사항명세서 수정 요청 시 에러가 발생한다.
-- [x] 요구분석명세서를 삭제할 수 있다.
-  - [x] 프로젝트 id와 요구분석명세서 번호를 통해 지정하여 삭제를 요청한다.
+- [x] 요구사항명세서를 삭제할 수 있다.
+  - [x] 프로젝트 id와 요구사항명세서 번호를 통해 지정하여 삭제를 요청한다.
   - [x] 삭제 시 이후 요구사항명세서의 번호들은 업데이트된다.
   - [x] 존재하지 않는 요구사항명세서 삭제 요청 시 에러가 발생한다.
 
@@ -301,8 +291,22 @@
 
 <br>
 
+<details><summary>스토리보드</summary>
+	
+[Storyboard](https://github.com/beyond-sw-camp/be04-2nd-if-1OR1-Tempository-Front/blob/main/docs/Tempository_storyboard.pdf)
+<br><br>
+[View Flow]<br>
+    <img src="https://github.com/beyond-sw-camp/be04-2nd-if-1OR1-Tempository-Front/blob/main/img/flow.png"/>
+</div>
+</details>
+
+<br>
+
 <details>
 <summary>UI TEST</summary>
+<br>
+
+[Test 설계서 및 결과](https://github.com/beyond-sw-camp/be04-2nd-if-1OR1-Tempository-Front/blob/main/docs/Testcase.pdf)
 
 
 </details>
