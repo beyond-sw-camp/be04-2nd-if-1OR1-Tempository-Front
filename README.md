@@ -19,10 +19,11 @@
 	<h2>📚 Tech Stack 📚</h2>
 </div>
 <div align="center">
-    <img src="https://img.shields.io/badge/Spring-6DB33F?style=flat&logo=Spring&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Spring-6DB33F?style=flat&logo=Spring&logoColor=white"/>
 	<img src="https://img.shields.io/badge/SpringBoot-6DB33F?style&logo=SpringBoot&logoColor=white"/>
-    <img src=" https://img.shields.io/badge/javascript-black?logo=javascript"/>
-    <img src="https://img.shields.io/badge/Vue-black?logo=vuedotjs"/>
+  <img src=" https://img.shields.io/badge/javascript-black?logo=javascript"/>
+  <img src="https://img.shields.io/badge/Vue-black?logo=vuedotjs"/>
+  <img src="https://img.shields.io/badge/Bootstrap-black?logo=bootstrap"/>
 </div>
 
 <br>
@@ -32,10 +33,10 @@
 </div>
 <div align=center>
 	<img src="https://img.shields.io/badge/IntelliJIDEA-000000.svg?style=flat&logo=intellij-idea&logoColor=white" />
-    <img src="https://img.shields.io/badge/VS Code-black?style=flat&logo=visualstudiocode" />
+  <img src="https://img.shields.io/badge/VS Code-black?style=flat&logo=visualstudiocode" />
 	<img src="https://img.shields.io/badge/GitHub-181717?style=flat&logo=GitHub&logoColor=white" />
-    <img src="https://img.shields.io/badge/Notion-000000?style=flat&logo=Notion&logoColor=white" />
-    <img src="https://img.shields.io/badge/Figma-black?style=flat&logo=Figma&logoColor=white" />
+  <img src="https://img.shields.io/badge/Notion-000000?style=flat&logo=Notion&logoColor=white" />
+  <img src="https://img.shields.io/badge/Figma-black?style=flat&logo=Figma&logoColor=white" />
 
 </div>
 
@@ -53,7 +54,7 @@
 <div align=left>
 
 ---
-<details><summary>화면 스토리보드</summary>
+<details><summary>스토리보드</summary>
 [View Flow]<br>
     <img src="https://github.com/beyond-sw-camp/be04-2nd-if-1OR1-Tempository-Front/blob/main/img/flow.png"/>
 </div>
@@ -207,7 +208,7 @@
 <br>
 
 <details>
-<summary>기능 설계서</summary>
+<summary>화면 설계서</summary>
 [Home]<br>
     (1) Header에 회원 가입과 로그인 페이지로 이동하는 버튼이 표시된다.<br>
     <img src="https://github.com/beyond-sw-camp/be04-2nd-if-1OR1-Tempository-Front/blob/main/img/Home.jpg"/>
