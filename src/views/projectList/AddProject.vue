@@ -12,7 +12,7 @@
       </form>     
     </div>
             <div class="button">
-            <button class="back-btn" type="submit">Save</button>
+            <button class="back-btn" @click="addProject">Save</button>
             <button class="back-btn" @click="backToProjectList">Back to Project List</button>
         </div>
   </template>
