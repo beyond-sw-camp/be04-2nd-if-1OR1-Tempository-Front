@@ -143,6 +143,7 @@ const deleteIssue = async (issueToDelete) => {
     });
     issues.value = issues.value.filter(issue => issue.no !== issueToDelete.no);
     filterIssues();
+    alert(`<${issueToDelete.name}> 이슈가 삭제되었습니다.`); // 팝업 메시지 추가
   } catch (error) {
     console.error('Failed to delete issue:', error);
   }
