@@ -133,6 +133,7 @@
     <div class="d-flex justify-content-between mt-3">
       <button class="btn btn-dark" @click="backToTableList">Back</button>
       <div>
+        <button v-if="isReadOnly" class="btn btn-dark me-2" @click="createDDL()">Create DDL</button>
         <button v-if="isReadOnly" class="btn btn-dark me-2" @click="toggleReadOnly">
           Edit
         </button>
@@ -164,6 +165,35 @@ const table = ref({
 const tableName = ref("");
 const isReadOnly = ref(true);
 const projectName = ref("");
+let ddlContent = ref("");
+
+// 에러 처리 함수
+function handleErrorMessage(error) {
+  if (error.response && error.response.status === 400) {
+    const errorMessage = error.response.data.message;
+    // 에러 메시지를 알림창으로 표시
+    alert(errorMessage);
+    // 로그인 페이지로 리다이렉트
+    router.push('/signin'); // 로그인 페이지 경로로 변경해주세요
+  }
+}
+
+async function fetchData() {
+  try {
+    const res = await axios.get('http://localhost:9500/user/who-am-i');
+    user.value.name = res.data.name;
+    user.value.nickname = res.data.nickname;
+    user.value.email = res.data.email;
+  } catch (error) {
+    handleErrorMessage(error);
+  }
+}
+
+onMounted(() => {
+  // 페이지가 마운트되면 데이터를 가져옵니다.
+  fetchData();
+});
+
 
 onMounted(async () => {
   if (currentRoute.params.tableNo === "new") {
@@ -295,6 +325,23 @@ const toggleRowReadOnly = (row) => {
 const backToTableList = () => {
   router.push(`/table/${currentRoute.params.projectId}`);
 };
+
+
+async function createDDL() {
+  try {
+    const response = await axios.get(`http://localhost:9500/table/create-ddl/${currentRoute.params.projectId}/${currentRoute.params.tableNo}`);
+    console.log(response)
+    ddlContent = response.data.message;
+
+    const ddlParts = response.data.message.split('\n');
+    ddlContent = ddlParts.join('\n');
+    alert(ddlContent);
+  } catch (error) {
+    console.error('Error fetching DDL content:', error);
+  }
+
+  return ddlContent;
+}
 </script>
 
 <style scoped>
