@@ -1,19 +1,16 @@
 <template>
-    <Header/>
-
-    <div class="container">
-      <div class="projects" v-for="project in projects" :key="project.id">
-        <div class="project">
-          <RouterLink :to="{ path: `/project/${project.id}`, query: { projectName: project.name } }" active-class="active"><h2>{{ project.name }}</h2></RouterLink>
-            </div>
-            <div class="project">
-              <RouterLink :to="{ path: `/project/${project.id}`, query: { projectName: project.name } }" active-class="active"><p>{{ project.content }}</p></RouterLink>
-              <button class="goProject" @click="goToProject(project.id,project.name)">Setting</button>
-            </div>
-            <div class="underline"></div>
+  <Header />
+  <div class="container">
+    <div class="project" v-for="project in projects" :key="project.id">
+      <div class="project-info">
+        <RouterLink :to="{ path: `/project/${project.id}`, query: { projectName: project.name } }" active-class="active">
+          <h2>{{ project.name }}</h2>
+          <p>{{ project.content }}</p>
+        </RouterLink>
       </div>
-
+      <button class="goProject" @click="goToProject(project.id, project.name)">Setting</button>
     </div>
+  </div>
 </template>
 
 <script setup>
@@ -75,77 +72,85 @@ onMounted(() => {
 <style scoped>
 /* Reset CSS */
 * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-    /* Body Styles */
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f0f0f0;
-    }
+/* Body Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+}
 
-    /* Header Styles */
-    header {
-      background-color: #333;
-      color: #fff;
-      padding: 1rem;
-      text-align: center;
-    }
+/* Header Styles */
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 1rem;
+  text-align: center;
+}
 
-    header button {
-      background-color: transparent;
-      border: none;
-      color: #fff;
-      cursor: pointer;
-      font-size: 1rem;
-      margin-right: 1rem;
-    }
+header button {
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-right: 1rem;
+}
 
-    /* Main Content Styles */
-    .container {
-      display: column;
-      margin: 2rem auto;
-      padding: 1rem;
-      background-color: lightgray;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+/* Main Content Styles */
+.container {
+  margin: 2rem auto;
+  padding: 1rem;
+}
 
-    }
+.project {
+  padding: 1rem;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 
-    .project {
-      border-bottom: 1px solid black;
-      padding: 1rem 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+.project-info {
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #dee2e6;
+  padding-right: 1rem;
+  margin-right: 1rem;
+}
 
-    .project:last-child {
-      border-bottom: none;
-    }
+.project-info a {
+  text-decoration: none;
+  color: inherit;
+}
 
-    .project h2 {
-      font-size: 1.2rem;
-      margin-bottom: 0.5rem;
-      color: black;
-    }
+.project h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem; /* 새로운 padding-bottom 추가 */
+  border-bottom: 1px solid #e0e0e0; /* 새로운 border-bottom 추가 */
+}
 
-    .project p {
-      margin-bottom: 0.5rem;
-      color: black;
+.project p {
+  color: #333;
+}
 
-      
-    }
-
-    .project button {
-      background-color: #333;
-      color: #fff;
-      border: none;
-      padding: 0.5rem 1rem;
-      cursor: pointer;
-    }
-
-
-
+.project button {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 4px;
+}
 </style>
