@@ -275,8 +275,8 @@
     (2) 프로젝트 진행 중 기능명세에 따른 테스트를 수정할 수 있다.<br>
     (3) 프로젝트 진행 중 기능명세에 따른 테스트를 조회할 수 있다.<br>
     (4) 프로젝트 진행 중 기능명세에 따른 테스트를 삭제할 수 있다.<br>
-    <img src="https://github.com/beyond-sw-camp/be04-2nd-if-1OR1-Tempository-Front/blob/main/img/Project_TestCase_Read.png"/>
-    <img src="https://github.com/beyond-sw-camp/be04-2nd-if-1OR1-Tempository-Front/blob/main/img/Project_TestCase_Edit.jpg"/>
+    <img src="https://github.com/beyond-sw-camp/be04-2nd-if-1OR1-Tempository-Front/blob/main/img/Project_Testcase_Read.png"/>
+    <img src="https://github.com/beyond-sw-camp/be04-2nd-if-1OR1-Tempository-Front/blob/main/img/Project_Testcase_Edit.jpg"/>
     <br><br>
     [이슈]<br>
     (1) 이슈들의 진행현황과 목록을 조회할 수 있다.<br>
