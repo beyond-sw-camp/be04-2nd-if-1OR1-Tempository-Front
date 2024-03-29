@@ -4,7 +4,7 @@
     <div class="container">
       <div class="projects" v-for="project in projects" :key="project.id">
         <div class="project">
-            <RouterLink :to="{ path: `/project/${project.id}`, query: { projectName: project.name } }" active-class="active"><h2>{{ project.name }}</h2></RouterLink>
+          <RouterLink :to="{ path: `/project/${project.id}`, query: { projectName: project.name } }" active-class="active"><h2>{{ project.name }}</h2></RouterLink>
             </div>
             <div class="project">
               <RouterLink :to="{ path: `/project/${project.id}`, query: { projectName: project.name } }" active-class="active"><p>{{ project.content }}</p></RouterLink>
@@ -18,7 +18,7 @@
 
 <script setup>
   import Header from './Header.vue';
-  import { useRouter } from 'vue-router';
+  import { useRouter,RouterLink } from 'vue-router';
   import { ref, onMounted } from 'vue';
   import axios from 'axios';
 
@@ -41,6 +41,33 @@ onMounted(async () => {
     console.error('데이터를 받아오는 중 에러 발생:', error);
   }
 });
+// 에러 처리 함수
+function handleErrorMessage(error) {
+  if (error.response && error.response.status === 400) {
+    const errorMessage = error.response.data.message;
+    // 에러 메시지를 알림창으로 표시
+    alert(errorMessage);
+    // 로그인 페이지로 리다이렉트
+    router.push('/signin'); // 로그인 페이지 경로로 변경해주세요
+  }
+}
+
+async function fetchData() {
+  try {
+    const res = await axios.get('http://localhost:9500/user/who-am-i');
+    user.value.name = res.data.name;
+    user.value.nickname = res.data.nickname;
+    user.value.email = res.data.email;
+  } catch (error) {
+    handleErrorMessage(error);
+  }
+}
+
+onMounted(() => {
+  // 페이지가 마운트되면 데이터를 가져옵니다.
+  fetchData();
+});
+
 
 
 </script>
@@ -102,13 +129,11 @@ onMounted(async () => {
       font-size: 1.2rem;
       margin-bottom: 0.5rem;
       color: black;
-      text-decoration: underline;
     }
 
     .project p {
       margin-bottom: 0.5rem;
       color: black;
-      text-decoration: underline;
 
       
     }
@@ -121,9 +146,6 @@ onMounted(async () => {
       cursor: pointer;
     }
 
-    .porject underline {
-      text-decoration: underline;
-    }
 
 
 </style>
