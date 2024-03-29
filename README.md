@@ -56,8 +56,7 @@
 ---
 <details><summary>스토리보드</summary>
 <br>
-[Storyboard]<br>
-(https://github.com/beyond-sw-camp/be04-2nd-if-1OR1-Tempository-Front/blob/main/docs/Tempository_스토리보드.pdf)
+[Storyboard](https://github.com/beyond-sw-camp/be04-2nd-if-1OR1-Tempository-Front/blob/main/docs/Tempository_스토리보드.pdf)
 <br>
 [View Flow]<br>
     <img src="https://github.com/beyond-sw-camp/be04-2nd-if-1OR1-Tempository-Front/blob/main/img/flow.png"/>
