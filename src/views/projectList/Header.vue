@@ -8,6 +8,7 @@
     <div class="buttons">
       <button class="who-am-i" @click="goToMyPage()">My Page</button>
       <button class="logout" @click="logout()">Log Out</button>
+      <button class="add-project" @click="goToAddProject()">Add Project</button>
     </div>
   </div>
   <br>
@@ -32,6 +33,11 @@ async function logout() {
   router.push('/')
 }
 
+
+function goToAddProject() {
+  router.push('/add-project'); 
+}
+
 </script>
 
 <style scoped>
@@ -48,6 +54,16 @@ button.who-am-i {
 }
 
 button.logout {
+  background-color: gray;
+  color: azure;
+  border: 1px solid black;
+  padding: 15px 30px;
+  font-size: 15px;
+  text-decoration: none;
+  display: inline-block;
+  shape-margin: 5%;
+}
+button.add-project {
   background-color: gray;
   color: azure;
   border: 1px solid black;

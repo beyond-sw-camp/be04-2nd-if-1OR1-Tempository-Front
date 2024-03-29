@@ -1,4 +1,3 @@
-
 <template>
   <div class="container my-4">
     <Header :projectName="projectName"></Header>
@@ -32,24 +31,25 @@
       </div>
       <div class="card-footer text-end">
         <button class="btn btn-secondary me-2" @click="backToIssueBoard">Back</button>
-        <button class="btn btn-primary" @click="navigateToIssueForm">Edit</button>
+        <button class="btn btn-primary me-2" @click="navigateToIssueForm">Edit</button>
+        <button class="btn btn-danger" @click="deleteIssue">Delete</button>
       </div>
     </div>
   </div>
-</template>
-
-<script setup>
-import Header from "./Header.vue";
-import { ref, onMounted } from "vue";
-import { useRoute, useRouter } from "vue-router";
-import axios from "axios";
-
-const route = useRoute();
-const router = useRouter();
-const issue = ref({});
-const projectName = ref('');
-
-onMounted(async () => {
+ </template>
+ 
+ <script setup>
+ import Header from "./Header.vue";
+ import { ref, onMounted } from "vue";
+ import { useRoute, useRouter } from "vue-router";
+ import axios from "axios";
+ 
+ const route = useRoute();
+ const router = useRouter();
+ const issue = ref({});
+ const projectName = ref('');
+ 
+ onMounted(async () => {
   try {
     const response = await axios.get(`http://localhost:9500/issue/${route.params.projectId}`);
     projectName.value = response.data.name;
@@ -57,9 +57,9 @@ onMounted(async () => {
   } catch (error) {
     console.error('Failed to fetch issue:', error);
   }
-});
-
-const getStatusClass = (status) => {
+ });
+ 
+ const getStatusClass = (status) => {
   switch (status) {
     case '진행예정':
       return 'text-primary';
@@ -70,48 +70,62 @@ const getStatusClass = (status) => {
     default:
       return '';
   }
-};
-
-const backToIssueBoard = () => {
+ };
+ 
+ const backToIssueBoard = () => {
   router.push({ name: "IssueBoard", params: { projectId: route.params.projectId } });
-};
-
-const navigateToIssueForm = () => {
+ };
+ 
+ const navigateToIssueForm = () => {
   router.push({ name: "IssueEdit", params: { projectId: route.params.projectId, issueNo: issue.value.no } });
-};
-</script>
-
-<style scoped>
-.issue-view {
+ };
+ 
+ const deleteIssue = async () => {
+  try {
+    await axios.delete(`http://localhost:9500/issue/remove/${route.params.projectId}`, {
+      data: {
+        no: issue.value.no
+      }
+    });
+    alert(`'${issue.value.name}' 이슈가 삭제되었습니다.`);
+    router.push({ name: "IssueBoard", params: { projectId: route.params.projectId } });
+  } catch (error) {
+    console.error('Failed to delete issue:', error);
+  }
+ };
+ </script>
+ 
+ <style scoped>
+ .issue-view {
   max-width: 800px;
   margin: 0 auto;
-}
-
-.issue-title {
+ }
+ 
+ .issue-title {
   font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 0;
-}
-
-.issue-status {
+ }
+ 
+ .issue-status {
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
-}
-
-.issue-content {
+ }
+ 
+ .issue-content {
   white-space: pre-wrap;
-}
-
-.issue-divider {
+ }
+ 
+ .issue-divider {
   margin: 1rem 0;
   border: 0;
   border-top: 1px solid #dee2e6;
-}
-
-@media (max-width: 767px) {
+ }
+ 
+ @media (max-width: 767px) {
   .issue-view {
     max-width: 100%;
     padding: 0 1rem;
   }
-}
-</style>
+ }
+ </style>

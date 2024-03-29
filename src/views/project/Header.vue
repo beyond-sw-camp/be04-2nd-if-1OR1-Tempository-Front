@@ -18,6 +18,7 @@
         border: 1px solid black;
         margin-top: 30px;
         margin-bottom: 30px;
+        background-color: white !important
     }
 
     .project {

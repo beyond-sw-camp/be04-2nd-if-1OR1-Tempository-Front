@@ -16,6 +16,7 @@ import ProjectTableAddView from '@/components/ProjectTableAddView.vue'
 import ProjectList from '@/views/projectList/ProjectList.vue'
 import Project from '@/views/project/Project.vue'
 import EditMyInfo from '@/views/mypage/EditMyInfo.vue';
+import AddProject from '@/views/projectList/AddProject.vue';
 
 const router = createRouter({
   history: createWebHistory(),
@@ -35,6 +36,9 @@ const router = createRouter({
       {
         path: '/who-am-i',
         component: MyPage
+      },      {
+        path: '/add-project',
+        component: AddProject
       },
 
       {
