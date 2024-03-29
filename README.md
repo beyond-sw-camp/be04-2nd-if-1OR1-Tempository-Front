@@ -59,7 +59,7 @@
 [Storyboard](https://github.com/beyond-sw-camp/be04-2nd-if-1OR1-Tempository-Front/blob/main/docs/Tempository_storyboard.pdf)
 <br>
 [View Flow]<br>
-    <img src="https://github.com/beyond-sw-camp/be04-2nd-if-1OR1-Tempository-Front/files/14800344/Tempository_storyboard.pdf"/>
+    <img src="https://github.com/beyond-sw-camp/be04-2nd-if-1OR1-Tempository-Front/blob/main/img/flow.png"/>
 </div>
 </details>
 
