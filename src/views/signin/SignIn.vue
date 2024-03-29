@@ -48,7 +48,6 @@ async function goToProjectList() {
     router.push('/projectList');
   } catch (error) {
     if (error.response) {
-      statusNickname.value = error.response.status;
       const errorMessage = '회원 정보가 일치하지 않습니다.';
       alert(errorMessage);
     }
