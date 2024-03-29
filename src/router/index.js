@@ -17,6 +17,7 @@ import ProjectList from '@/views/projectList/ProjectList.vue'
 import Project from '@/views/project/Project.vue'
 import EditMyInfo from '@/views/mypage/EditMyInfo.vue';
 import AddProject from '@/views/projectList/AddProject.vue';
+import EditPassword from '@/views/mypage/EditPassword.vue';
 
 const router = createRouter({
   history: createWebHistory(),
@@ -127,7 +128,12 @@ const router = createRouter({
         path: '/edit-my-info',
         name: 'EditMyInfo',
         component: EditMyInfo
-      }
+      },
+      {
+        path: '/edit-password',
+        name: 'EditPassword',
+        component: EditPassword
+      },
     ]
 });
 
